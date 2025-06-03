@@ -335,7 +335,7 @@
 
                 <div class="result-item">
                     <span class="result-label">Profit per Unit:</span>
-                    <span class="result-value" id="absoluteMargin">$0.00</span>
+                    <span class="result-value" id="profitPerUnit">$0.00</span>
                 </div>
 
                 <div class="result-item">
@@ -359,22 +359,34 @@
 
     <script>
         function calculateResults() {
-            // Get input values
+            console.log('calculateResults called'); // Debug line
+            
+            // Get all input values
             const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
             const transportationCosts = parseFloat(document.getElementById('transportationCosts').value) || 0;
             const storingCosts = parseFloat(document.getElementById('storingCosts').value) || 0;
             const deliveryCosts = parseFloat(document.getElementById('deliveryCosts').value) || 0;
+            const vatPercent = parseFloat(document.getElementById('vat').value) || 0;
             const cac = parseFloat(document.getElementById('cac').value) || 0;
             const productPrice = parseFloat(document.getElementById('productPrice').value) || 0;
             const targetProfit = parseFloat(document.getElementById('targetProfit').value) || 0;
 
-            // Calculate total costs
-            const totalCosts = costPrice + transportationCosts + storingCosts + deliveryCosts + cac;
+            console.log('Input values:', {
+                costPrice, transportationCosts, storingCosts, deliveryCosts, 
+                vatPercent, cac, productPrice, targetProfit
+            });
+
+            // Calculate VAT amount (percentage of cost price)
+            const vatAmount = (costPrice * vatPercent) / 100;
+            console.log('VAT calculation:', { costPrice, vatPercent, vatAmount });
+
+            // Calculate total costs (including VAT on cost price)
+            const totalCosts = costPrice + vatAmount + transportationCosts + storingCosts + deliveryCosts + cac;
 
             // Calculate revenue per unit (same as product price)
             const revenuePerUnit = productPrice;
 
-            // Calculate profit per unit (previously absolute margin)
+            // Calculate profit per unit
             const profitPerUnit = revenuePerUnit - totalCosts;
             const percentageMargin = revenuePerUnit > 0 ? (profitPerUnit / revenuePerUnit) * 100 : 0;
 
@@ -391,19 +403,25 @@
                 const lossAmount = Math.abs(profitPerUnit);
                 document.getElementById('unitsTitle').textContent = 'Product Analysis';
                 document.getElementById('unitsNeeded').textContent = 'Not Profitable';
-                profitabilityMessage = `The product is not profitable, you are set to make a loss of ${lossAmount.toFixed(2)} per unit`;
+                profitabilityMessage = `The product is not profitable, you are set to make a loss of $${lossAmount.toFixed(2)} per unit`;
+                unitsNeeded = 0;
             } else {
                 document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
                 document.getElementById('unitsNeeded').textContent = '0';
                 profitabilityMessage = 'Break-even: No profit or loss per unit';
+                unitsNeeded = 0;
             }
 
-            // Update display
-            document.getElementById('totalCosts').textContent = `${totalCosts.toFixed(2)}`;
-            document.getElementById('revenuePerUnit').textContent = `${revenuePerUnit.toFixed(2)}`;
+            // Calculate revenue based on units target
+            const revenueFromUnits = unitsNeeded * revenuePerUnit;
+            console.log('Revenue calculation:', { unitsNeeded, revenuePerUnit, revenueFromUnits });
+
+            // Update all displays
+            document.getElementById('totalCosts').textContent = `$${totalCosts.toFixed(2)}`;
+            document.getElementById('revenuePerUnit').textContent = `$${revenuePerUnit.toFixed(2)}`;
             
-            const profitPerUnitElement = document.getElementById('absoluteMargin');
-            profitPerUnitElement.textContent = `${profitPerUnit.toFixed(2)}`;
+            const profitPerUnitElement = document.getElementById('profitPerUnit');
+            profitPerUnitElement.textContent = `$${profitPerUnit.toFixed(2)}`;
             profitPerUnitElement.className = profitPerUnit >= 0 ? 'result-value positive' : 'result-value negative';
 
             const percentageMarginElement = document.getElementById('percentageMargin');
@@ -414,17 +432,35 @@
             const messageElement = document.getElementById('profitabilityMessage');
             messageElement.textContent = profitabilityMessage;
             messageElement.style.color = profitPerUnit < 0 ? '#ff6b6b' : '#4ecdc4';
+
+            // Update revenue from units
+            document.getElementById('revenueFromUnits').textContent = `$${revenueFromUnits.toFixed(2)}`;
         }
 
-        // Add event listeners to all input fields
-        const inputs = document.querySelectorAll('input[type="number"]');
-        inputs.forEach(input => {
-            input.addEventListener('input', calculateResults);
-            input.addEventListener('change', calculateResults);
-        });
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, setting up event listeners');
+            
+            // Get all input fields and add event listeners
+            const inputFields = [
+                'costPrice', 'transportationCosts', 'storingCosts', 'deliveryCosts', 
+                'vat', 'cac', 'productPrice', 'targetProfit'
+            ];
 
-        // Initial calculation
-        calculateResults();
+            inputFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', calculateResults);
+                    field.addEventListener('change', calculateResults);
+                    console.log(`Event listeners added to ${fieldId}`);
+                } else {
+                    console.error(`Field ${fieldId} not found`);
+                }
+            });
+
+            // Initial calculation
+            calculateResults();
+        });
     </script>
 </body>
 </html>
