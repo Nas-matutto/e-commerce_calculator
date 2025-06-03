@@ -300,6 +300,11 @@
                 </div>
 
                 <div class="input-group">
+                    <label for="vat">VAT (%)</label>
+                    <input type="number" id="vat" placeholder="0.00" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="input-group">
                     <label for="cac">Customer Acquisition Cost ($)</label>
                     <input type="number" id="cac" placeholder="0.00" step="0.01" min="0">
                 </div>
@@ -342,6 +347,11 @@
                     <h3 id="unitsTitle">Units Needed for Monthly Profit Target</h3>
                     <div class="units-number" id="unitsNeeded">0</div>
                     <div id="profitabilityMessage" style="margin-top: 15px; font-size: 1.1rem; font-weight: 600;"></div>
+                </div>
+
+                <div class="result-item highlight-result" style="margin-top: 20px;">
+                    <span class="result-label">Revenue based on Units Target:</span>
+                    <span class="result-value" id="revenueFromUnits">$0.00</span>
                 </div>
             </div>
         </div>
