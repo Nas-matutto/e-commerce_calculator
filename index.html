@@ -420,6 +420,7 @@
         const inputs = document.querySelectorAll('input[type="number"]');
         inputs.forEach(input => {
             input.addEventListener('input', calculateResults);
+            input.addEventListener('change', calculateResults);
         });
 
         // Initial calculation
