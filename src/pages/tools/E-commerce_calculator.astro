@@ -265,6 +265,66 @@ const metadata = {
       50% { transform: translateY(-20px) rotate(180deg); }
     }
 
+    /* Header Styling Fixes */
+    .navbar {
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .navbar .logo {
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+    }
+
+    .navbar .nav-links a {
+      color: #1e293b !important;
+      font-weight: 500 !important;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #3b82f6 !important;
+      background: rgba(59, 130, 246, 0.1) !important;
+    }
+
+    .navbar .btn-primary {
+      background: linear-gradient(45deg, #3b82f6, #8b5cf6) !important;
+      color: white !important;
+      border: none !important;
+    }
+
+    .navbar .btn-primary:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4) !important;
+    }
+
+    /* Toggle theme button styling */
+    .navbar button[aria-label*="toggle"] {
+      color: #1e293b !important;
+    }
+
+    .navbar button[aria-label*="toggle"]:hover {
+      background: rgba(59, 130, 246, 0.1) !important;
+    }
+
+    /* Dropdown menu styling */
+    .navbar .dropdown-menu {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .navbar .dropdown-menu a {
+      color: #1e293b !important;
+    }
+
+    .navbar .dropdown-menu a:hover {
+      background: rgba(59, 130, 246, 0.1) !important;
+      color: #3b82f6 !important;
+    }
+
     /* Back button styling */
     .back-button {
       text-align: center;
