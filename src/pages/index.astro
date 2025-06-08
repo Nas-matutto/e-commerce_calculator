@@ -122,7 +122,7 @@ const metadata = {
     image={{
       src: heroImage,
       alt: 'Nas on Radio',
-      
+
     }}
   >
     <Fragment slot="content">
@@ -308,6 +308,30 @@ const metadata = {
     </Fragment>
   </Features2>
 
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+  id="CallToAction"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get in touch',
+        href: '/contactus',
+        target: '_blank',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      <span class="sm:whitespace-nowrap">Get in touch</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Drop me an email and I'll get back to you as soon as possible.
+    </Fragment>
+  </CallToAction>
+  
+
   <!-- HighlightedPosts Widget ******* -->
 
   <BlogLatestPosts
@@ -369,27 +393,4 @@ const metadata = {
       { title: 'Users', amount: '48.4K' },
     ]}
   /> -->
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-  id="CallToAction"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get in touch',
-        href: 'https://github.com/onwidget/astrowind',
-        target: '_blank',
-        icon: 'tabler:mail',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      <span class="sm:whitespace-nowrap">Get in touch</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Drop me an email and I'll get back to you as soon as possible.
-    </Fragment>
-  </CallToAction>
-</Layout>
+ </Layout>
