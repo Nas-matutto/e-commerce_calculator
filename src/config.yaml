@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Sellingwithnas
+  site: 'https://sellingwithnas.com'
   base: '/'
   trailingSlash: false
 
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
+    default: Selling with Nas
     template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "\U0001F680 Helping businesses scale faster with Tech, automations and Go To Market strategy."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Selling with Nas
     images:
       - url: '~/assets/images/default.png'
         width: 1200
