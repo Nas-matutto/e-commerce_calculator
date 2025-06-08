@@ -7,13 +7,13 @@ export const headerData = {
       links: [
         {
           text: 'E-commerce Profit Calculator',
-          href: getPermalink('/homes/saas'),
+          href: getPermalink('/tools/E-commerce_calculator'),
         },
        ],
     },
     {
       text: 'Work with me',
-      href: '#',
+      href: '#CallToAction',
     },
     {
       text: 'Blogs',
