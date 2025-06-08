@@ -1,5 +1,6 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import { headerData } from '~/navigation';
 
 const metadata = {
   title: 'E-commerce Cost Calculator - Calculate Profits, Margins & Unit Targets',
@@ -8,9 +9,312 @@ const metadata = {
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- Calculator Content -->
-  <div class="calculator-page">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{metadata.title}</title>
+  <meta name="description" content={metadata.description}>
+  <meta name="keywords" content={metadata.keywords}>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* Header spacing adjustment */
+    .main-content {
+      margin-top: 80px; /* Space for fixed header */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #00d4ff, #5865f2, #ff6b6b);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      color: #a0a0a0;
+      margin-top: 10px;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    .input-section, .results-section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #00d4ff;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #5865f2);
+      border-radius: 2px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #00d4ff;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .input-group input::placeholder {
+      color: #a0a0a0;
+    }
+
+    .target-revenue {
+      background: rgba(0, 212, 255, 0.1);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .result-label {
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    .result-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #00d4ff;
+    }
+
+    .result-value.positive {
+      color: #4ecdc4;
+    }
+
+    .result-value.negative {
+      color: #ff6b6b;
+    }
+
+    .highlight-result {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    }
+
+    .units-needed {
+      text-align: center;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(88, 101, 242, 0.15));
+      border-radius: 16px;
+      border: 2px solid rgba(0, 212, 255, 0.4);
+      margin-top: 20px;
+    }
+
+    .units-needed h3 {
+      color: #00d4ff;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .units-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-circle:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-circle:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .floating-circle:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Back button styling */
+    .back-button {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      background: transparent;
+      color: #00d4ff;
+      border: 2px solid #00d4ff;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #00d4ff;
+      color: #0f0f23;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .container {
+        padding: 15px;
+      }
+      
+      .input-section, .results-section {
+        padding: 20px;
+      }
+
+      .main-content {
+        margin-top: 70px; /* Smaller header spacing on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- AstroWind Header -->
+  <Header {...headerData} isSticky showToggleTheme />
+
+  <!-- Main Calculator Content -->
+  <div class="main-content">
     <div class="floating-elements">
       <div class="floating-circle"></div>
       <div class="floating-circle"></div>
@@ -104,392 +408,116 @@ const metadata = {
         </div>
       </div>
 
-      <!-- Back to home button -->
-      <div style="text-align: center; margin: 40px 0;">
-        <a href="/" class="btn btn-secondary">← Back to Home</a>
+      <div class="back-button">
+        <a href="/" class="btn-secondary">← Back to Home</a>
       </div>
     </div>
   </div>
-</Layout>
 
-<style>
-  .calculator-page {
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-    min-height: 100vh;
-    color: #ffffff;
-    overflow-x: hidden;
-    padding-top: 80px; /* Space for header */
-  }
+  <script>
+    function calculateResults() {
+      console.log('calculateResults called');
+      
+      // Get all input values
+      const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
+      const transportationCosts = parseFloat(document.getElementById('transportationCosts').value) || 0;
+      const storingCosts = parseFloat(document.getElementById('storingCosts').value) || 0;
+      const deliveryCosts = parseFloat(document.getElementById('deliveryCosts').value) || 0;
+      const vatPercent = parseFloat(document.getElementById('vat').value) || 0;
+      const cac = parseFloat(document.getElementById('cac').value) || 0;
+      const productPrice = parseFloat(document.getElementById('productPrice').value) || 0;
+      const targetProfit = parseFloat(document.getElementById('targetProfit').value) || 0;
 
-  .calculator-page * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+      console.log('Input values:', {
+        costPrice, transportationCosts, storingCosts, deliveryCosts, 
+        vatPercent, cac, productPrice, targetProfit
+      });
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+      // Calculate VAT amount (percentage of cost price)
+      const vatAmount = (costPrice * vatPercent) / 100;
+      console.log('VAT calculation:', { costPrice, vatPercent, vatAmount });
 
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-  }
+      // Calculate total costs (including VAT on cost price)
+      const totalCosts = costPrice + vatAmount + transportationCosts + storingCosts + deliveryCosts + cac;
 
-  .header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, #00d4ff, #5865f2, #ff6b6b);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 3s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-    margin: 0;
-  }
+      // Calculate revenue per unit (same as product price)
+      const revenuePerUnit = productPrice;
 
-  .header p {
-    font-size: 1.2rem;
-    color: #a0a0a0;
-    margin-top: 10px;
-  }
+      // Calculate profit per unit
+      const profitPerUnit = revenuePerUnit - totalCosts;
+      const percentageMargin = revenuePerUnit > 0 ? (profitPerUnit / revenuePerUnit) * 100 : 0;
 
-  @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  .calculator-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-
-  @media (max-width: 768px) {
-    .calculator-grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    
-    .header h1 {
-      font-size: 2.2rem;
-    }
-    
-    .container {
-      padding: 15px;
-    }
-    
-    .input-section, .results-section {
-      padding: 20px;
-    }
-  }
-
-  .input-section, .results-section {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    color: #00d4ff;
-    text-align: center;
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #00d4ff, #5865f2);
-    border-radius: 2px;
-  }
-
-  .input-group {
-    margin-bottom: 20px;
-  }
-
-  .input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #e0e0e0;
-    font-size: 0.95rem;
-  }
-
-  .input-group input {
-    width: 100%;
-    padding: 15px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-  }
-
-  .input-group input:focus {
-    outline: none;
-    border-color: #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .input-group input::placeholder {
-    color: #a0a0a0;
-  }
-
-  .target-revenue {
-    background: rgba(0, 212, 255, 0.1) !important;
-    border: 2px solid rgba(0, 212, 255, 0.3) !important;
-  }
-
-  .result-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .result-label {
-    font-weight: 600;
-    color: #e0e0e0;
-  }
-
-  .result-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #00d4ff;
-  }
-
-  .result-value.positive {
-    color: #4ecdc4;
-  }
-
-  .result-value.negative {
-    color: #ff6b6b;
-  }
-
-  .highlight-result {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
-    border: 2px solid rgba(0, 212, 255, 0.3);
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-  }
-
-  .units-needed {
-    text-align: center;
-    padding: 25px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(88, 101, 242, 0.15));
-    border-radius: 16px;
-    border: 2px solid rgba(0, 212, 255, 0.4);
-    margin-top: 20px;
-  }
-
-  .units-needed h3 {
-    color: #00d4ff;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-  }
-
-  .units-number {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-  }
-
-  .floating-elements {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .floating-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .floating-circle:nth-child(1) {
-    width: 80px;
-    height: 80px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-  }
-
-  .floating-circle:nth-child(2) {
-    width: 120px;
-    height: 120px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
-  }
-
-  .floating-circle:nth-child(3) {
-    width: 60px;
-    height: 60px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 4s;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-  }
-
-  /* Button styles for back button */
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 2px solid #00d4ff;
-    color: #00d4ff;
-    background: transparent;
-  }
-
-  .btn:hover {
-    background: #00d4ff;
-    color: #0f0f23;
-    transform: translateY(-2px);
-  }
-</style>
-
-<script>
-  function calculateResults() {
-    console.log('calculateResults called');
-    
-    // Get all input values
-    const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
-    const transportationCosts = parseFloat(document.getElementById('transportationCosts').value) || 0;
-    const storingCosts = parseFloat(document.getElementById('storingCosts').value) || 0;
-    const deliveryCosts = parseFloat(document.getElementById('deliveryCosts').value) || 0;
-    const vatPercent = parseFloat(document.getElementById('vat').value) || 0;
-    const cac = parseFloat(document.getElementById('cac').value) || 0;
-    const productPrice = parseFloat(document.getElementById('productPrice').value) || 0;
-    const targetProfit = parseFloat(document.getElementById('targetProfit').value) || 0;
-
-    console.log('Input values:', {
-      costPrice, transportationCosts, storingCosts, deliveryCosts, 
-      vatPercent, cac, productPrice, targetProfit
-    });
-
-    // Calculate VAT amount (percentage of cost price)
-    const vatAmount = (costPrice * vatPercent) / 100;
-    console.log('VAT calculation:', { costPrice, vatPercent, vatAmount });
-
-    // Calculate total costs (including VAT on cost price)
-    const totalCosts = costPrice + vatAmount + transportationCosts + storingCosts + deliveryCosts + cac;
-
-    // Calculate revenue per unit (same as product price)
-    const revenuePerUnit = productPrice;
-
-    // Calculate profit per unit
-    const profitPerUnit = revenuePerUnit - totalCosts;
-    const percentageMargin = revenuePerUnit > 0 ? (profitPerUnit / revenuePerUnit) * 100 : 0;
-
-    // Calculate units needed for target profit
-    let unitsNeeded = 0;
-    let profitabilityMessage = '';
-    
-    if (profitPerUnit > 0) {
-      unitsNeeded = targetProfit > 0 ? Math.ceil(targetProfit / profitPerUnit) : 0;
-      document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
-      document.getElementById('unitsNeeded').textContent = unitsNeeded.toLocaleString();
-      profitabilityMessage = '';
-    } else if (profitPerUnit < 0) {
-      const lossAmount = Math.abs(profitPerUnit);
-      document.getElementById('unitsTitle').textContent = 'Product Analysis';
-      document.getElementById('unitsNeeded').textContent = 'Not Profitable';
-      profitabilityMessage = `The product is not profitable, you are set to make a loss of $${lossAmount.toFixed(2)} per unit`;
-      unitsNeeded = 0;
-    } else {
-      document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
-      document.getElementById('unitsNeeded').textContent = '0';
-      profitabilityMessage = 'Break-even: No profit or loss per unit';
-      unitsNeeded = 0;
-    }
-
-    // Calculate revenue based on units target
-    const revenueFromUnits = unitsNeeded * revenuePerUnit;
-    console.log('Revenue calculation:', { unitsNeeded, revenuePerUnit, revenueFromUnits });
-
-    // Update all displays
-    document.getElementById('totalCosts').textContent = `$${totalCosts.toFixed(2)}`;
-    document.getElementById('revenuePerUnit').textContent = `$${revenuePerUnit.toFixed(2)}`;
-    
-    const profitPerUnitElement = document.getElementById('profitPerUnit');
-    profitPerUnitElement.textContent = `$${profitPerUnit.toFixed(2)}`;
-    profitPerUnitElement.className = profitPerUnit >= 0 ? 'result-value positive' : 'result-value negative';
-
-    const percentageMarginElement = document.getElementById('percentageMargin');
-    percentageMarginElement.textContent = `${percentageMargin.toFixed(1)}%`;
-    percentageMarginElement.className = percentageMargin >= 0 ? 'result-value positive' : 'result-value negative';
-
-    // Update profitability message
-    const messageElement = document.getElementById('profitabilityMessage');
-    messageElement.textContent = profitabilityMessage;
-    messageElement.style.color = profitPerUnit < 0 ? '#ff6b6b' : '#4ecdc4';
-
-    // Update revenue from units
-    document.getElementById('revenueFromUnits').textContent = `$${revenueFromUnits.toFixed(2)}`;
-  }
-
-  // Wait for DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, setting up event listeners');
-    
-    // Get all input fields and add event listeners
-    const inputFields = [
-      'costPrice', 'transportationCosts', 'storingCosts', 'deliveryCosts', 
-      'vat', 'cac', 'productPrice', 'targetProfit'
-    ];
-
-    inputFields.forEach(fieldId => {
-      const field = document.getElementById(fieldId);
-      if (field) {
-        field.addEventListener('input', calculateResults);
-        field.addEventListener('change', calculateResults);
-        console.log(`Event listeners added to ${fieldId}`);
+      // Calculate units needed for target profit
+      let unitsNeeded = 0;
+      let profitabilityMessage = '';
+      
+      if (profitPerUnit > 0) {
+        unitsNeeded = targetProfit > 0 ? Math.ceil(targetProfit / profitPerUnit) : 0;
+        document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
+        document.getElementById('unitsNeeded').textContent = unitsNeeded.toLocaleString();
+        profitabilityMessage = '';
+      } else if (profitPerUnit < 0) {
+        const lossAmount = Math.abs(profitPerUnit);
+        document.getElementById('unitsTitle').textContent = 'Product Analysis';
+        document.getElementById('unitsNeeded').textContent = 'Not Profitable';
+        profitabilityMessage = `The product is not profitable, you are set to make a loss of $${lossAmount.toFixed(2)} per unit`;
+        unitsNeeded = 0;
       } else {
-        console.error(`Field ${fieldId} not found`);
+        document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
+        document.getElementById('unitsNeeded').textContent = '0';
+        profitabilityMessage = 'Break-even: No profit or loss per unit';
+        unitsNeeded = 0;
       }
-    });
 
-    // Initial calculation
-    calculateResults();
-  });
-</script>
+      // Calculate revenue based on units target
+      const revenueFromUnits = unitsNeeded * revenuePerUnit;
+      console.log('Revenue calculation:', { unitsNeeded, revenuePerUnit, revenueFromUnits });
+
+      // Update all displays
+      document.getElementById('totalCosts').textContent = `$${totalCosts.toFixed(2)}`;
+      document.getElementById('revenuePerUnit').textContent = `$${revenuePerUnit.toFixed(2)}`;
+      
+      const profitPerUnitElement = document.getElementById('profitPerUnit');
+      profitPerUnitElement.textContent = `$${profitPerUnit.toFixed(2)}`;
+      profitPerUnitElement.className = profitPerUnit >= 0 ? 'result-value positive' : 'result-value negative';
+
+      const percentageMarginElement = document.getElementById('percentageMargin');
+      percentageMarginElement.textContent = `${percentageMargin.toFixed(1)}%`;
+      percentageMarginElement.className = percentageMargin >= 0 ? 'result-value positive' : 'result-value negative';
+
+      // Update profitability message
+      const messageElement = document.getElementById('profitabilityMessage');
+      messageElement.textContent = profitabilityMessage;
+      messageElement.style.color = profitPerUnit < 0 ? '#ff6b6b' : '#4ecdc4';
+
+      // Update revenue from units
+      document.getElementById('revenueFromUnits').textContent = `$${revenueFromUnits.toFixed(2)}`;
+    }
+
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, setting up event listeners');
+      
+      // Get all input fields and add event listeners
+      const inputFields = [
+        'costPrice', 'transportationCosts', 'storingCosts', 'deliveryCosts', 
+        'vat', 'cac', 'productPrice', 'targetProfit'
+      ];
+
+      inputFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.addEventListener('input', calculateResults);
+          field.addEventListener('change', calculateResults);
+          console.log(`Event listeners added to ${fieldId}`);
+        } else {
+          console.error(`Field ${fieldId} not found`);
+        }
+      });
+
+      // Initial calculation
+      calculateResults();
+    });
+  </script>
+</body>
+</html>
