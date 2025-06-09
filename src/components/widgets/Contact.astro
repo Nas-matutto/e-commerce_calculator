@@ -114,13 +114,24 @@ const {
 </WidgetWrapper>
 
 <script>
-  // Get the script URL from environment variable
+  // Debug: Check all environment variables
+  console.log('All env vars:', import.meta.env);
+  console.log('Specific var:', import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL);
+  console.log('Typeof var:', typeof import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL);
+  
   const GOOGLE_SCRIPT_URL = import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL;
+  
+  // If environment variable fails, use fallback
+  const FALLBACK_URL = 'https://script.google.com/macros/s/AKfycbyG0Ts6zkZbNVNsRf9UyrWR2lFE2jAg1QQ7Kv9kHZAal0PJeUW-IwmlH7jXMgINL9Wn/exec';
+  
+  const FINAL_URL = GOOGLE_SCRIPT_URL || FALLBACK_URL;
+  
+  console.log('Using final URL:', FINAL_URL);
 
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
-    if (!form || !GOOGLE_SCRIPT_URL) {
-      console.error('Contact form or script URL not configured');
+    if (!form) {
+      console.error('Contact form not found');
       return;
     }
 
@@ -133,16 +144,13 @@ const {
       const successMsg = document.getElementById('success-message');
       const errorMsg = document.getElementById('error-message');
       
-      // Show loading state
-      submitBtn.disabled = true;
+       submitBtn.disabled = true;
       submitText?.classList.add('hidden');
       submitLoading?.classList.remove('hidden');
-      
-      // Hide previous messages
-      successMsg?.classList.add('hidden');
+       successMsg?.classList.add('hidden');
       errorMsg?.classList.add('hidden');
       
-    try {
+      try {
         const formData = new FormData(form);
         const data = {
           name: formData.get('name'),
@@ -150,7 +158,10 @@ const {
           message: formData.get('message')
         };
         
-      await fetch(GOOGLE_SCRIPT_URL, {
+        console.log('Sending data:', data);
+        console.log('To URL:', FINAL_URL);
+        
+        await fetch(FINAL_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -159,18 +170,18 @@ const {
           body: JSON.stringify(data)
         });
         
-      successMsg?.classList.remove('hidden');
+        successMsg?.classList.remove('hidden');
         form.reset();
-      successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-    } catch (error) {
-      console.error('Error:', error);
-      errorMsg?.classList.remove('hidden');
-      errorMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } finally {
-      submitBtn.disabled = false;
-      submitText?.classList.remove('hidden');
-      submitLoading?.classList.add('hidden');
+      } catch (error) {
+        console.error('Error:', error);
+        errorMsg?.classList.remove('hidden');
+        errorMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } finally {
+        submitBtn.disabled = false;
+        submitText?.classList.remove('hidden');
+        submitLoading?.classList.add('hidden');
       }
     });
   });
