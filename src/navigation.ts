@@ -13,7 +13,7 @@ export const headerData = {
     },
     {
       text: 'Work with me',
-      href: '#CallToAction',
+      href: '#Features2',
     },
     {
       text: 'Blogs',
