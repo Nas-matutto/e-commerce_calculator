@@ -114,12 +114,15 @@ const {
 </WidgetWrapper>
 
 <script>
-  // Replace this URL with your Google Apps Script Web app URL
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG0Ts6zkZbNVNsRf9UyrWR2lFE2jAg1QQ7Kv9kHZAal0PJeUW-IwmlH7jXMgINL9Wn/exec';
+  // Get the script URL from environment variable
+  const GOOGLE_SCRIPT_URL = import.meta.env.PUBLIC_GOOGLE_SCRIPT_URL;
 
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
-    if (!form) return;
+    if (!form || !GOOGLE_SCRIPT_URL) {
+      console.error('Contact form or script URL not configured');
+      return;
+    }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -139,8 +142,7 @@ const {
       successMsg?.classList.add('hidden');
       errorMsg?.classList.add('hidden');
       
-      try {
-        // Get form data
+    try {
         const formData = new FormData(form);
         const data = {
           name: formData.get('name'),
@@ -148,8 +150,7 @@ const {
           message: formData.get('message')
         };
         
-        // Send to Google Sheets
-        await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -158,24 +159,18 @@ const {
           body: JSON.stringify(data)
         });
         
-        // Show success message
-        successMsg?.classList.remove('hidden');
+      successMsg?.classList.remove('hidden');
         form.reset();
+      successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-        // Scroll to success message
-        successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-      } catch (error) {
-        console.error('Error:', error);
-        errorMsg?.classList.remove('hidden');
-        
-        // Scroll to error message
-        errorMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } finally {
-        // Reset button state
-        submitBtn.disabled = false;
-        submitText?.classList.remove('hidden');
-        submitLoading?.classList.add('hidden');
+    } catch (error) {
+      console.error('Error:', error);
+      errorMsg?.classList.remove('hidden');
+      errorMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally {
+      submitBtn.disabled = false;
+      submitText?.classList.remove('hidden');
+      submitLoading?.classList.add('hidden');
       }
     });
   });
