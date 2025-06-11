@@ -503,14 +503,14 @@ const metadata = {
     console.log('calculateResults called');
     
     // Get all input values
-    const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
-    const transportationCosts = parseFloat(document.getElementById('transportationCosts').value) || 0;
-    const storingCosts = parseFloat(document.getElementById('storingCosts').value) || 0;
-    const deliveryCosts = parseFloat(document.getElementById('deliveryCosts').value) || 0;
-    const vatPercent = parseFloat(document.getElementById('vat').value) || 0;
-    const cac = parseFloat(document.getElementById('cac').value) || 0;
-    const productPrice = parseFloat(document.getElementById('productPrice').value) || 0;
-    const targetProfit = parseFloat(document.getElementById('targetProfit').value) || 0;
+    const costPrice = parseFloat(document.getElementById('costPrice')?.value) || 0;
+    const transportationCosts = parseFloat(document.getElementById('transportationCosts')?.value) || 0;
+    const storingCosts = parseFloat(document.getElementById('storingCosts')?.value) || 0;
+    const deliveryCosts = parseFloat(document.getElementById('deliveryCosts')?.value) || 0;
+    const vatPercent = parseFloat(document.getElementById('vat')?.value) || 0;
+    const cac = parseFloat(document.getElementById('cac')?.value) || 0;
+    const productPrice = parseFloat(document.getElementById('productPrice')?.value) || 0;
+    const targetProfit = parseFloat(document.getElementById('targetProfit')?.value) || 0;
 
     console.log('Input values:', {
       costPrice, transportationCosts, storingCosts, deliveryCosts, 
@@ -537,18 +537,27 @@ const metadata = {
     
     if (profitPerUnit > 0) {
       unitsNeeded = targetProfit > 0 ? Math.ceil(targetProfit / profitPerUnit) : 0;
-      document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
-      document.getElementById('unitsNeeded').textContent = unitsNeeded.toLocaleString();
+      const unitsTitle = document.getElementById('unitsTitle');
+      const unitsNeededEl = document.getElementById('unitsNeeded');
+      
+      if (unitsTitle) unitsTitle.textContent = 'Units Needed for Monthly Profit Target';
+      if (unitsNeededEl) unitsNeededEl.textContent = unitsNeeded.toLocaleString();
       profitabilityMessage = '';
     } else if (profitPerUnit < 0) {
       const lossAmount = Math.abs(profitPerUnit);
-      document.getElementById('unitsTitle').textContent = 'Product Analysis';
-      document.getElementById('unitsNeeded').textContent = 'Not Profitable';
+      const unitsTitle = document.getElementById('unitsTitle');
+      const unitsNeededEl = document.getElementById('unitsNeeded');
+      
+      if (unitsTitle) unitsTitle.textContent = 'Product Analysis';
+      if (unitsNeededEl) unitsNeededEl.textContent = 'Not Profitable';
       profitabilityMessage = `The product is not profitable, you are set to make a loss of $${lossAmount.toFixed(2)} per unit`;
       unitsNeeded = 0;
     } else {
-      document.getElementById('unitsTitle').textContent = 'Units Needed for Monthly Profit Target';
-      document.getElementById('unitsNeeded').textContent = '0';
+      const unitsTitle = document.getElementById('unitsTitle');
+      const unitsNeededEl = document.getElementById('unitsNeeded');
+      
+      if (unitsTitle) unitsTitle.textContent = 'Units Needed for Monthly Profit Target';
+      if (unitsNeededEl) unitsNeededEl.textContent = '0';
       profitabilityMessage = 'Break-even: No profit or loss per unit';
       unitsNeeded = 0;
     }
@@ -557,36 +566,47 @@ const metadata = {
     const revenueFromUnits = unitsNeeded * revenuePerUnit;
     console.log('Revenue calculation:', { unitsNeeded, revenuePerUnit, revenueFromUnits });
 
-    // Update all displays
-    document.getElementById('totalCosts').textContent = `$${totalCosts.toFixed(2)}`;
-    document.getElementById('revenuePerUnit').textContent = `$${revenuePerUnit.toFixed(2)}`;
-    
+    // Update all displays with null checks
+    const totalCostsEl = document.getElementById('totalCosts');
+    const revenuePerUnitEl = document.getElementById('revenuePerUnit');
     const profitPerUnitElement = document.getElementById('profitPerUnit');
-    profitPerUnitElement.textContent = `$${profitPerUnit.toFixed(2)}`;
-    profitPerUnitElement.className = profitPerUnit >= 0 ? 'result-value positive' : 'result-value negative';
-
     const percentageMarginElement = document.getElementById('percentageMargin');
-    percentageMarginElement.textContent = `${percentageMargin.toFixed(1)}%`;
-    percentageMarginElement.className = percentageMargin >= 0 ? 'result-value positive' : 'result-value negative';
+    const messageElement = document.getElementById('profitabilityMessage');
+    const revenueFromUnitsEl = document.getElementById('revenueFromUnits');
+
+    if (totalCostsEl) totalCostsEl.textContent = `$${totalCosts.toFixed(2)}`;
+    if (revenuePerUnitEl) revenuePerUnitEl.textContent = `$${revenuePerUnit.toFixed(2)}`;
+    
+    if (profitPerUnitElement) {
+      profitPerUnitElement.textContent = `$${profitPerUnit.toFixed(2)}`;
+      profitPerUnitElement.className = profitPerUnit >= 0 ? 'result-value positive' : 'result-value negative';
+    }
+
+    if (percentageMarginElement) {
+      percentageMarginElement.textContent = `${percentageMargin.toFixed(1)}%`;
+      percentageMarginElement.className = percentageMargin >= 0 ? 'result-value positive' : 'result-value negative';
+    }
 
     // Update profitability message
-    const messageElement = document.getElementById('profitabilityMessage');
-    messageElement.textContent = profitabilityMessage;
-    messageElement.style.color = profitPerUnit < 0 ? '#dc2626' : '#059669';
+    if (messageElement) {
+      messageElement.textContent = profitabilityMessage;
+      messageElement.style.color = profitPerUnit < 0 ? '#dc2626' : '#059669';
+    }
 
     // Update revenue from units
-    document.getElementById('revenueFromUnits').textContent = `$${revenueFromUnits.toFixed(2)}`;
+    if (revenueFromUnitsEl) revenueFromUnitsEl.textContent = `$${revenueFromUnits.toFixed(2)}`;
   }
 
-  // Wait for DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, setting up event listeners');
+  function initializeCalculator() {
+    console.log('Initializing calculator...');
     
     // Get all input fields and add event listeners
     const inputFields = [
       'costPrice', 'transportationCosts', 'storingCosts', 'deliveryCosts', 
       'vat', 'cac', 'productPrice', 'targetProfit'
     ];
+
+    let allFieldsFound = true;
 
     inputFields.forEach(fieldId => {
       const field = document.getElementById(fieldId);
@@ -596,10 +616,31 @@ const metadata = {
         console.log(`Event listeners added to ${fieldId}`);
       } else {
         console.error(`Field ${fieldId} not found`);
+        allFieldsFound = false;
       }
     });
 
-    // Initial calculation
-    calculateResults();
-  });
+    if (allFieldsFound) {
+      console.log('All fields found, running initial calculation');
+      // Initial calculation
+      calculateResults();
+    } else {
+      console.log('Some fields missing, retrying in 100ms...');
+      setTimeout(initializeCalculator, 100);
+    }
+  }
+
+  // Multiple initialization methods to handle different loading scenarios
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCalculator);
+  } else {
+    // DOM is already loaded
+    initializeCalculator();
+  }
+
+  // Also try after a small delay for navigation cases
+  setTimeout(initializeCalculator, 50);
+
+  // Additional fallback for Astro navigation
+  document.addEventListener('astro:page-load', initializeCalculator);
 </script>
