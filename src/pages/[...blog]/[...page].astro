@@ -17,20 +17,35 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { page } = Astro.props as Props;
+const { page } = Astro.props;
+const siteUrl = 'https://www.sellingwithnas.com'; // Replace with your domain
 const currentPage = page.currentPage ?? 1;
 
 // const allCategories = await findCategories();
 // const allTags = await findTags();
 
 const metadata = {
-  title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  title: `${currentPage > 1 ? `Posts - Page ${currentPage}` : 'Posts'} | Selling with Nas`,
+  description: 'Discover expert insights on e-commerce, sales strategies, GTM tactics, and business automations. Learn how to scale your online business with proven strategies.',
+  canonical: `${siteUrl}/blog${currentPage > 1 ? `/page/${currentPage}` : ''}`,
+  
   robots: {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,
   },
+  
   openGraph: {
-    type: 'blog',
+    basic: {
+      title: `${currentPage > 1 ? `Posts - Page ${currentPage}` : 'Posts'} | Selling with Nas`,
+      type: 'website',
+      image: `${siteUrl}/images/blog-og-image.jpg`, // You'll need to add this image
+      url: `${siteUrl}/blog${currentPage > 1 ? `/page/${currentPage}` : ''}`,
+    },
+  optional: {
+      description: 'Discover expert insights on e-commerce, sales strategies, GTM tactics, and business automations.',
+      siteName: 'Selling with Nas',
+      locale: 'en_US',
+    }
   },
 };
 ---
@@ -38,9 +53,9 @@ const metadata = {
 <Layout metadata={metadata}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline
-      subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
+      subtitle="Read all Posts related to E-commerce, Sales, GTM and Automations below."
     >
-      The Blog
+      All Posts
     </Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />

@@ -13,24 +13,11 @@ export const headerData = {
     },
     {
       text: 'Work with me',
-      href: '#Features2',
+      href: '/contact',
     },
     {
-      text: 'Blogs',
-      links: [
-        {
-          text: 'E-commerce',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'AI',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'Automations',
-          href: getBlogPermalink(),
-        },
-       ],
+      text: 'Posts',
+      href: '/blog',
     },
    ],
   actions: [],
