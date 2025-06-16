@@ -39,7 +39,8 @@ You need to know who else is out there and how you’re different. 9 out of 10 t
 - Make a list of 10 brands who are seemingly doing well in that space. Have a close look at the features they offer, their price point, the markets they sell in...
 - Assess their websites. Do you identify patterns, do you identify gaps?
 - Have a look at customer reviews. What are people saying? On their websites but most importnatly social media. What do they *love* and what *annoys* them about the product.
-- Go to [Facebook Ads Library](https://www.facebook.com/ads/library/) and search for the brands you've identified. This will allow you to see the types of Ads they're running and the features/CTAs they're using to acquire customers.
+- Go to <a href="https://www.facebook.com/ads/library" target="_blank" rel="noopener noreferrer">Facebook Ads Library</a> and search for the brands you’ve identified. This will allow you to see the types of Ads they’re running and the features/CTAs they’re using to acquire customers.
+
 
 Once you have all of this, figure out your edge: is it your vibe, what's your story, why are you building it? Remember people buy from people, not faceless brands.
 
@@ -49,7 +50,7 @@ Once you have all of this, figure out your edge: is it your vibe, what's your st
 You don’t need a 100-page brand book. Keep it simple and clean. You're building a brand, not writing a thesis, so it should take you a week, not months. 
 
 - Pick a name that’s easy to say, spell, and remember. Don't overcomplicate with a backstory - people don't care.
-- Use [Canva](https://www.canva.com/) to whip up a decent logo.
+- Use <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Canva</a> to whip up a decent logo.
 - Write one clear sentence that says what your product is and who it’s for. If you can't clearly comunicate what your product is and who is it for, you need to go back to step 1.
 
 Keep everything looking consistent - your site, emails, social, even packaging. And ideally make it simple enough, you don't need Apple's branding when selling a $30 t-shirt.
@@ -62,7 +63,7 @@ Whether you’re making it yourself, dropshipping, or working with a factory, th
 
 ## 5. Price It Right (No Guessing)
 
-I've written a whole piece about how to price your product correctly when launching, and you can read it [here](https://www.sellingwithnas.com/how-much-to-charge-for-your-ecommerce-products).
+I've written a whole piece about how to price your product correctly when launching, and you can read it <a href="https://www.sellingwithnas.com/how-much-to-charge-for-your-ecommerce-products" target="_blank" rel="noopener noreferrer">here</a>.
 
 I won't repeat it too much, but to put it simply, start with your product cost, add the extra costs you will incur (such as shipping, storing, VAT and more), and try to predict how much it will cost you to acquire customers. Add it all up, add a margin for extra costs, and then your ideal margin to keep operating and growing. 
 
@@ -126,7 +127,7 @@ Don’t launch to crickets. Build buzz! Make "Build in Public" videos. Shout abo
 
 Create FOMO and get people excited before Day 1. And if you're struggling with this part, then you're in the right place. I mean, ain't this called "Selling with Nas"? 😜
 
-If you need support with selling your products, (get in touch)[https://www.sellingwithnas.com/contact]!
+If you need support with selling your products, [get in touch](https://www.sellingwithnas.com/contact)!
 
 
 ## 9. Sell. Sell. Sell.
