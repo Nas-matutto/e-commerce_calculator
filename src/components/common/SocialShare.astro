@@ -10,7 +10,7 @@ export interface Props {
 const { text, url, class: className = 'inline-block' } = Astro.props;
 ---
 
-<div class={className}>
+<div class={`${className} flex items-center`}>
   <span class="align-super font-bold text-slate-500 dark:text-slate-400">Connect:</span>
   <a class="ml-2 rtl:ml-0 rtl:mr-2" href="https://www.linkedin.com/in/nasser-mansurali-659145102/" target="_blank" rel="noopener noreferrer" title="Connect on LinkedIn">
     <Icon name="tabler:brand-linkedin" class="w-6 h-6 text-gray-400 dark:text-slate-500 hover:text-black dark:hover:text-slate-300" />
