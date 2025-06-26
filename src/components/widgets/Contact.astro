@@ -117,81 +117,118 @@ const {
 </WidgetWrapper>
 
 <script>
-  console.log('🚀 Contact form script loading...');
+(function() {
+  'use strict';
   
-  // REPLACE THESE WITH YOUR ACTUAL GOOGLE FORM VALUES
-  const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeBMT5NXq95oBaHuV-cOttoixEtp95dveXE3nqtpBOmJVVreQ/formResponse';
-  const NAME_FIELD = 'entry.1716757582';      // Replace with actual entry number
-  const EMAIL_FIELD = 'entry.1618351575';    // Replace with actual entry number  
-  const MESSAGE_FIELD = 'entry.777943266'; // Replace with actual entry number
+  // Configuration
+  const CONFIG = {
+    GOOGLE_FORM_URL: 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse',
+    NAME_FIELD: 'entry.YOUR_NAME_ENTRY',
+    EMAIL_FIELD: 'entry.YOUR_EMAIL_ENTRY', 
+    MESSAGE_FIELD: 'entry.YOUR_MESSAGE_ENTRY'
+  };
   
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 DOM loaded');
+  function initForm() {
+    console.log('🔥 Initializing contact form...');
     
     const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
     
-    if (!form) {
-      console.error('❌ Contact form not found');
+    if (!form || !submitBtn) {
+      console.log('❌ Form elements not found, retrying...');
+      setTimeout(initForm, 100);
       return;
     }
     
-    console.log('✅ Contact form found');
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      console.log('🎉 Form submitted!');
+    console.log('✅ Form elements found');
+    
+    // Remove any existing listeners
+    form.onsubmit = null;
+    submitBtn.onclick = null;
+    
+    // Add submit handler
+    function handleSubmit(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       
-      // Get form elements
-      const submitBtn = document.getElementById('submit-btn');
+      console.log('🎉 Form submit triggered');
+      
       const submitText = document.getElementById('submit-text');
       const submitLoading = document.getElementById('submit-loading');
       const successMsg = document.getElementById('success-message');
       const errorMsg = document.getElementById('error-message');
       
-      // Get form data
-      const formData = new FormData();
-      formData.append(NAME_FIELD, document.getElementById('name').value);
-      formData.append(EMAIL_FIELD, document.getElementById('email').value);
-      formData.append(MESSAGE_FIELD, document.getElementById('message').value);
+      // Get values
+      const nameVal = document.getElementById('name')?.value || '';
+      const emailVal = document.getElementById('email')?.value || '';
+      const messageVal = document.getElementById('message')?.value || '';
       
-      console.log('📤 Sending to Google Forms...');
+      if (!nameVal || !emailVal || !messageVal) {
+        console.log('❌ Missing required fields');
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        return;
+      }
       
-      // Update UI - show loading
+      console.log('📤 Submitting:', { nameVal, emailVal, messageVal });
+      
+      // Update UI
       if (submitBtn) submitBtn.disabled = true;
-      if (submitText) submitText.classList.add('hidden');
-      if (submitLoading) submitLoading.classList.remove('hidden');
+      if (submitText) submitText.style.display = 'none';
+      if (submitLoading) submitLoading.style.display = 'inline';
       if (successMsg) successMsg.classList.add('hidden');
       if (errorMsg) errorMsg.classList.add('hidden');
       
-      try {
-        // Submit to Google Forms using no-cors mode
-        await fetch(GOOGLE_FORM_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: formData
-        });
+      // Submit to Google Forms
+      const formData = new FormData();
+      formData.append(CONFIG.NAME_FIELD, nameVal);
+      formData.append(CONFIG.EMAIL_FIELD, emailVal);
+      formData.append(CONFIG.MESSAGE_FIELD, messageVal);
+      
+      fetch(CONFIG.GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(() => {
+        console.log('✅ Submitted successfully');
         
-        console.log('✅ Form submitted successfully!');
-        
-        // Show success message
+        // Show success
         if (successMsg) {
           successMsg.classList.remove('hidden');
-          successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          successMsg.scrollIntoView({ behavior: 'smooth' });
         }
+        
+        // Reset form
         form.reset();
         
-      } catch (error) {
-        console.error('❌ Form submission error:', error);
-        if (errorMsg) {
-          errorMsg.classList.remove('hidden');
-          errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      } finally {
-        // Reset button state
+      }).catch((error) => {
+        console.log('❌ Error:', error);
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        
+      }).finally(() => {
+        // Reset button
         if (submitBtn) submitBtn.disabled = false;
-        if (submitText) submitText.classList.remove('hidden');
-        if (submitLoading) submitLoading.classList.add('hidden');
-      }
-    });
-  });
+        if (submitText) submitText.style.display = 'inline';
+        if (submitLoading) submitLoading.style.display = 'none';
+      });
+    }
+    
+    // Attach handlers
+    form.addEventListener('submit', handleSubmit);
+    submitBtn.addEventListener('click', handleSubmit);
+    
+    console.log('🎯 Form handlers attached');
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initForm);
+  } else {
+    initForm();
+  }
+  
+  // Backup initialization
+  setTimeout(initForm, 1000);
+})();
 </script>
