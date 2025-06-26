@@ -2,7 +2,7 @@
 publishDate: 2025-06-26T00:00:00Z
 author: Nas
 title: How to Optimize Your Shopify Landing Page for Higher Conversion
-excerpt: A good landing page can be the difference between converting or losing a potential customer.These are the best tips to optimize it.
+excerpt: A good landing page can be the difference between converting or losing a potential customer. These are the best tips to optimize it.
 image: https://images.unsplash.com/photo-1642132652806-8aa09801c2ab?q=80&w=2920&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 category: E-commerce
 tags:
@@ -94,8 +94,8 @@ Yes, your product might be made with special fabric or have unique dimensions, b
 
 So whenever you are on your Shopify Editor tweaking around your page's copy, remember: **Features tell, benefits sell.** Try to always translate your features into emotional and practical benefits that reasonate with your visitor.
 
-> Instead of: “Made with bamboo viscose.”  
-> Say: “Soft, breathable fabric that keeps you cool all day.”
+Instead of: “Made with bamboo viscose.”  
+Say: “Soft, breathable fabric that keeps you cool all day.”
 
 
 ## 5. Use Social Proof (Real and Strategic)
@@ -109,7 +109,7 @@ Below are some of the things you should collect from people who use your product
 - **Star ratings**
 - **User-generated content (UGC)** from Instagram or TikTok
 
-Pro tip: Place at least one **review above the fold**, and more further down the page. Social proof should appear where users might hesitate. The goal is to get them to trust your product is worth buying.
+💡 Pro tip: Place at least one **review above the fold**, and more further down the page. Social proof should appear where users might hesitate. The goal is to get them to trust your product is worth buying.
 
 
 ## 6. Reduce Friction at Every Step
