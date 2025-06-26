@@ -120,13 +120,21 @@ const {
 (function() {
   'use strict';
   
+  // Prevent multiple initializations
+  if (window.contactFormInitialized) {
+    console.log('⚠️ Contact form already initialized');
+    return;
+  }
+  
   // Configuration
   const CONFIG = {
     GOOGLE_FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeBMT5NXq95oBaHuV-cOttoixEtp95dveXE3nqtpBOmJVVreQ/formResponse',
     NAME_FIELD: 'entry.1716757582',
-    EMAIL_FIELD: 'entry.1618351575', 
+    EMAIL_FIELD: 'entry.1618351575',
     MESSAGE_FIELD: 'entry.777943266'
   };
+  
+  let isSubmitting = false; // Prevent multiple submissions
   
   function initForm() {
     console.log('🔥 Initializing contact form...');
@@ -142,9 +150,11 @@ const {
     
     console.log('✅ Form elements found');
     
+    // Mark as initialized
+    window.contactFormInitialized = true;
+    
     // Remove any existing listeners
     form.onsubmit = null;
-    submitBtn.onclick = null;
     
     // Add submit handler
     function handleSubmit(e) {
@@ -153,6 +163,13 @@ const {
         e.stopPropagation();
       }
       
+      // Prevent multiple concurrent submissions
+      if (isSubmitting) {
+        console.log('⏳ Already submitting, please wait...');
+        return;
+      }
+      
+      isSubmitting = true;
       console.log('🎉 Form submit triggered');
       
       const submitText = document.getElementById('submit-text');
@@ -168,6 +185,7 @@ const {
       if (!nameVal || !emailVal || !messageVal) {
         console.log('❌ Missing required fields');
         if (errorMsg) errorMsg.classList.remove('hidden');
+        isSubmitting = false;
         return;
       }
       
@@ -207,16 +225,16 @@ const {
         if (errorMsg) errorMsg.classList.remove('hidden');
         
       }).finally(() => {
-        // Reset button
+        // Reset button and submission flag
         if (submitBtn) submitBtn.disabled = false;
         if (submitText) submitText.style.display = 'inline';
         if (submitLoading) submitLoading.style.display = 'none';
+        isSubmitting = false;
       });
     }
     
-    // Attach handlers
+    // Only attach to form submit
     form.addEventListener('submit', handleSubmit);
-    
     
     console.log('🎯 Form handlers attached');
   }
@@ -227,8 +245,5 @@ const {
   } else {
     initForm();
   }
-  
-  // Backup initialization
-  setTimeout(initForm, 1000);
 })();
 </script>
