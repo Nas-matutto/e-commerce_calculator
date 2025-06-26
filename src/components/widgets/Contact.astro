@@ -40,7 +40,7 @@ const {
           <p>Please try again or email me directly.</p>
         </div>
 
-        <!-- Custom Form (replacing FormContainer) -->
+        <!-- Custom Form -->
         <form id="contact-form" class="space-y-6">
           <!-- Name Field -->
           <div>
@@ -144,10 +144,11 @@ const {
       const successMsg = document.getElementById('success-message');
       const errorMsg = document.getElementById('error-message');
       
-       submitBtn.disabled = true;
+      // Reset states
+      submitBtn.disabled = true;
       submitText?.classList.add('hidden');
       submitLoading?.classList.remove('hidden');
-       successMsg?.classList.add('hidden');
+      successMsg?.classList.add('hidden');
       errorMsg?.classList.add('hidden');
       
       try {
@@ -161,21 +162,37 @@ const {
         console.log('Sending data:', data);
         console.log('To URL:', FINAL_URL);
         
-        await fetch(FINAL_URL, {
+        const response = await fetch(FINAL_URL, {
           method: 'POST',
-          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
         });
         
-        successMsg?.classList.remove('hidden');
-        form.reset();
-        successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+        
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Response data:', result);
+          
+          if (result.success) {
+            console.log('Form submitted successfully!');
+            successMsg?.classList.remove('hidden');
+            form.reset();
+            successMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            console.error('Server returned error:', result.error);
+            throw new Error(result.error || 'Submission failed');
+          }
+        } else {
+          console.error('HTTP error:', response.status, response.statusText);
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Form submission error:', error);
         errorMsg?.classList.remove('hidden');
         errorMsg?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {
