@@ -37,11 +37,14 @@ const {
         <!-- Error Message -->
         <div id="error-message" class="hidden mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg dark:bg-red-900 dark:border-red-600 dark:text-red-200">
           <p class="font-semibold">Oops! Something went wrong.</p>
-          <p>Please try again or email me directly.</p>
+          <p>Please try again or email me directly at nasser.m.95@gmail.com</p>
         </div>
 
         <!-- Contact Form -->
-        <form id="contact-form" class="space-y-6">
+        <form 
+          id="contact-form" 
+          class="space-y-6"
+        >
           <!-- Name Field -->
           <div>
             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -116,8 +119,11 @@ const {
 <script>
   console.log('🚀 Contact form script loading...');
   
-  // Google Apps Script URL
-  const FALLBACK_URL = 'https://script.google.com/macros/s/AKfycbzPQkmHcGtGfcmfRjDO9c7qqoII5c3ajrq5pRM_Jwq9k-0iKCg_WlR-ZKxbOgAi_8T5/exec';
+  // REPLACE THESE WITH YOUR ACTUAL GOOGLE FORM VALUES
+  const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+  const NAME_FIELD = 'entry.1716757582';      // Replace with actual entry number
+  const EMAIL_FIELD = 'entry.1618351575';    // Replace with actual entry number  
+  const MESSAGE_FIELD = 'entry.777943266'; // Replace with actual entry number
   
   document.addEventListener('DOMContentLoaded', function() {
     console.log('🎯 DOM loaded');
@@ -143,15 +149,12 @@ const {
       const errorMsg = document.getElementById('error-message');
       
       // Get form data
-      const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-      };
+      const formData = new FormData();
+      formData.append(NAME_FIELD, document.getElementById('name').value);
+      formData.append(EMAIL_FIELD, document.getElementById('email').value);
+      formData.append(MESSAGE_FIELD, document.getElementById('message').value);
       
-      console.log('📤 Sending data:', data);
-      console.log('📍 To URL:', FALLBACK_URL);
+      console.log('📤 Sending to Google Forms...');
       
       // Update UI - show loading
       if (submitBtn) submitBtn.disabled = true;
@@ -161,17 +164,13 @@ const {
       if (errorMsg) errorMsg.classList.add('hidden');
       
       try {
-        // Use no-cors mode to bypass CORS issues
-        await fetch(FALLBACK_URL, {
+        // Submit to Google Forms using no-cors mode
+        await fetch(GOOGLE_FORM_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
+          body: formData
         });
         
-        console.log('📨 Request sent with no-cors mode');
         console.log('✅ Form submitted successfully!');
         
         // Show success message
