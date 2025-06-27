@@ -10,7 +10,7 @@ site:
 metadata:
   title:
     default: Selling with Nas
-    template: '%s — AstroWind'
+    template: '%s | Selling with Nas'
   description: "\U0001F680 Helping businesses scale faster with Tech, automations and Go To Market strategy."
   robots:
     index: true
