@@ -40,10 +40,17 @@ const {
           <p>Please try again or email me directly at nasser.m.95@gmail.com</p>
         </div>
 
+        <!-- Hidden iframe for form submission -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
+
         <!-- Contact Form -->
         <form 
-          id="contact-form" 
+          id="contact-form"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSeBMT5NXq95oBaHuV-cOttoixEtp95dveXE3nqtpBOmJVVreQ/formResponse"
+          method="POST"
+          target="hidden_iframe"
           class="space-y-6"
+          onsubmit="handleFormSubmit()"
         >
           <!-- Name Field -->
           <div>
@@ -53,7 +60,7 @@ const {
             <input 
               type="text" 
               id="name" 
-              name="name" 
+              name="entry.1716757582"
               required 
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors"
             >
@@ -67,7 +74,7 @@ const {
             <input 
               type="email" 
               id="email" 
-              name="email" 
+              name="entry.1618351575"
               required 
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors"
             >
@@ -80,7 +87,7 @@ const {
             </label>
             <textarea 
               id="message" 
-              name="message" 
+              name="entry.777943266"
               rows="4" 
               required 
               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors resize-vertical"
@@ -116,134 +123,55 @@ const {
   }
 </WidgetWrapper>
 
-<script>
-(function() {
-  'use strict';
+<script is:inline>
+// Global functions that will always work
+window.handleFormSubmit = function() {
+  console.log('📤 Form being submitted...');
   
-  // Prevent multiple initializations
-  if (window.contactFormInitialized) {
-    console.log('⚠️ Contact form already initialized');
-    return;
-  }
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitLoading = document.getElementById('submit-loading');
+  const successMsg = document.getElementById('success-message');
+  const errorMsg = document.getElementById('error-message');
   
-  // Configuration
-  const CONFIG = {
-    GOOGLE_FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSeBMT5NXq95oBaHuV-cOttoixEtp95dveXE3nqtpBOmJVVreQ/formResponse',
-    NAME_FIELD: 'entry.1716757582',
-    EMAIL_FIELD: 'entry.1618351575',
-    MESSAGE_FIELD: 'entry.777943266'
-  };
+  // Update UI to show loading
+  if (submitBtn) submitBtn.disabled = true;
+  if (submitText) submitText.style.display = 'none';
+  if (submitLoading) submitLoading.style.display = 'inline';
+  if (successMsg) successMsg.classList.add('hidden');
+  if (errorMsg) errorMsg.classList.add('hidden');
   
-  let isSubmitting = false; // Prevent multiple submissions
+  return true; // Allow form submission
+};
+
+window.handleFormResponse = function() {
+  console.log('✅ Form response received');
   
-  function initForm() {
-    console.log('🔥 Initializing contact form...');
-    
-    const form = document.getElementById('contact-form');
+  setTimeout(function() {
     const submitBtn = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+    const submitLoading = document.getElementById('submit-loading');
+    const successMsg = document.getElementById('success-message');
+    const form = document.getElementById('contact-form');
     
-    if (!form || !submitBtn) {
-      console.log('❌ Form elements not found, retrying...');
-      setTimeout(initForm, 100);
-      return;
+    // Show success message
+    if (successMsg) {
+      successMsg.classList.remove('hidden');
+      successMsg.scrollIntoView({ behavior: 'smooth' });
     }
     
-    console.log('✅ Form elements found');
+    // Reset form
+    if (form) form.reset();
     
-    // Mark as initialized
-    window.contactFormInitialized = true;
+    // Reset button
+    if (submitBtn) submitBtn.disabled = false;
+    if (submitText) submitText.style.display = 'inline';
+    if (submitLoading) submitLoading.style.display = 'none';
     
-    // Remove any existing listeners
-    form.onsubmit = null;
-    
-    // Add submit handler
-    function handleSubmit(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      
-      // Prevent multiple concurrent submissions
-      if (isSubmitting) {
-        console.log('⏳ Already submitting, please wait...');
-        return;
-      }
-      
-      isSubmitting = true;
-      console.log('🎉 Form submit triggered');
-      
-      const submitText = document.getElementById('submit-text');
-      const submitLoading = document.getElementById('submit-loading');
-      const successMsg = document.getElementById('success-message');
-      const errorMsg = document.getElementById('error-message');
-      
-      // Get values
-      const nameVal = document.getElementById('name')?.value || '';
-      const emailVal = document.getElementById('email')?.value || '';
-      const messageVal = document.getElementById('message')?.value || '';
-      
-      if (!nameVal || !emailVal || !messageVal) {
-        console.log('❌ Missing required fields');
-        if (errorMsg) errorMsg.classList.remove('hidden');
-        isSubmitting = false;
-        return;
-      }
-      
-      console.log('📤 Submitting:', { nameVal, emailVal, messageVal });
-      
-      // Update UI
-      if (submitBtn) submitBtn.disabled = true;
-      if (submitText) submitText.style.display = 'none';
-      if (submitLoading) submitLoading.style.display = 'inline';
-      if (successMsg) successMsg.classList.add('hidden');
-      if (errorMsg) errorMsg.classList.add('hidden');
-      
-      // Submit to Google Forms
-      const formData = new FormData();
-      formData.append(CONFIG.NAME_FIELD, nameVal);
-      formData.append(CONFIG.EMAIL_FIELD, emailVal);
-      formData.append(CONFIG.MESSAGE_FIELD, messageVal);
-      
-      fetch(CONFIG.GOOGLE_FORM_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      }).then(() => {
-        console.log('✅ Submitted successfully');
-        
-        // Show success
-        if (successMsg) {
-          successMsg.classList.remove('hidden');
-          successMsg.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Reset form
-        form.reset();
-        
-      }).catch((error) => {
-        console.log('❌ Error:', error);
-        if (errorMsg) errorMsg.classList.remove('hidden');
-        
-      }).finally(() => {
-        // Reset button and submission flag
-        if (submitBtn) submitBtn.disabled = false;
-        if (submitText) submitText.style.display = 'inline';
-        if (submitLoading) submitLoading.style.display = 'none';
-        isSubmitting = false;
-      });
-    }
-    
-    // Only attach to form submit
-    form.addEventListener('submit', handleSubmit);
-    
-    console.log('🎯 Form handlers attached');
-  }
-  
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initForm);
-  } else {
-    initForm();
-  }
-})();
+    console.log('🎉 Form submission complete!');
+  }, 1000); // Small delay to ensure iframe loads
+};
+
+// Test function to verify script is working
+console.log('🚀 Contact form script loaded successfully');
 </script>

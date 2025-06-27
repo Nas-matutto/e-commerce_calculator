@@ -11,6 +11,9 @@ tags:
   - DTC
 metadata:
   canonical: https://www.sellingwithnas.com/blog/optimize-shopify-landing-page
+  title: "How to Optimize Your Shopify Landing Page for Higher Conversions"
+  description: "Learn proven strategies to optimize your Shopify landing pages for higher conversions. Discover design tips, copywriting techniques, and A/B testing methods to boost your e-commerce sales and reduce bounce rates."
+  keywords: "shopify landing page optimization, conversion rate optimization, shopify conversion tips, landing page design, e-commerce conversion, shopify store optimization, CRO strategies, landing page best practices, shopify sales funnel"
 ---
 
 If you’re driving traffic to your <a href="https://www.shopify.com/" target="_blank" rel="noopener noreferrer">Shopify</a>  store but not seeing many conversions, your landing page could be the bottleneck holding you back. A landing page is often your customer's first impression of your brand, and if it's not optimized for conversions, you're leaving money on the table.
