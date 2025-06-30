@@ -13,7 +13,7 @@ const metadata = {
   <div class="container">
     <div class="header">
       <h1>E-commerce Brand Launch Cost Estimator</h1>
-      <p>Get estimated costs for launching your e-commerce brand</p>
+      <p>Get realistic cost estimates for launching your e-commerce brand</p>
     </div>
     
     <div class="main-content">
@@ -72,7 +72,7 @@ const metadata = {
           <div class="analysis-box">
             <h3>Launch Cost Analysis</h3>
             <p id="analysisRationale">
-              Your estimated launch costs are based on your product category, target price point, market scope, and business scale. These ranges reflect current market conditions and typical startup requirements.
+              Your estimated launch costs are based on your product category, target price point, and business scale. These ranges reflect current market conditions and typical startup requirements.
             </p>
           </div>
           
@@ -490,6 +490,8 @@ const metadata = {
 </style>
 
 <script>
+  console.log('🚀 Launch cost estimator script starting...');
+
   // Cost calculation logic - REALISTIC industry data
   const costData = {
     electronics: {
@@ -647,22 +649,30 @@ const metadata = {
   };
 
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('Launch cost estimator loaded');
+    console.log('🎯 DOM loaded, setting up event listener');
     
     const analyzeBtn = document.getElementById('analyze-button');
+    console.log('Button found:', !!analyzeBtn);
     
     if (analyzeBtn) {
-      analyzeBtn.addEventListener('click', function() {
+      analyzeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('🎉 Button clicked!');
         calculateCosts();
       });
+    } else {
+      console.error('❌ Analyze button not found');
     }
   });
 
   function calculateCosts() {
+    console.log('📊 Calculate costs function called');
+    
     const productType = document.getElementById('productType').value;
-    const targetPrice = parseInt(document.getElementById('targetPrice').value) || 50;
-    const targetMarket = document.getElementById('targetMarket').value;
+    const targetPrice = parseInt(document.getElementById('targetPrice').value) || 29;
     const businessScale = document.getElementById('businessScale').value;
+
+    console.log('Form values:', { productType, targetPrice, businessScale });
 
     if (!productType) {
       showError('Please select a product category');
@@ -702,22 +712,30 @@ const metadata = {
   }
 
   function displayResults(costs, considerations, productType, targetPrice, businessScale) {
+    console.log('🎨 Displaying results');
+    
     // Hide placeholder
-    document.getElementById('placeholder').classList.add('hide');
+    const placeholder = document.getElementById('placeholder');
+    if (placeholder) placeholder.classList.add('hide');
+
+    // Calculate total
+    const totalMin = costs.sourcing[0] + costs.inventory[0] + costs.shipping[0] + costs.platform[0] + costs.marketing[0] + costs.legal[0] + costs.working[0];
+    const totalMax = costs.sourcing[1] + costs.inventory[1] + costs.shipping[1] + costs.platform[1] + costs.marketing[1] + costs.legal[1] + costs.working[1];
 
     // Update rationale
     const rationale = `Your ${productType} business with ${businessScale} scale approach requires strategic cost planning. These estimates are based on current market data and successful launches in this category.`;
-    document.getElementById('analysisRationale').textContent = rationale;
+    const rationaleElement = document.getElementById('analysisRationale');
+    if (rationaleElement) rationaleElement.textContent = rationale;
 
     // Add summary stats
     const summaryStatsHTML = `
       <div class="summary-stats">
         <div class="stat-card">
-          <div class="stat-number">${totalMin.toLocaleString()}</div>
+          <div class="stat-number">$${totalMin.toLocaleString()}</div>
           <div class="stat-label">Minimum Budget</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">${totalMax.toLocaleString()}</div>
+          <div class="stat-number">$${totalMax.toLocaleString()}</div>
           <div class="stat-label">Recommended Budget</div>
         </div>
         <div class="stat-card">
@@ -731,10 +749,6 @@ const metadata = {
       </div>
     `;
 
-    // Calculate total
-    const totalMin = costs.sourcing[0] + costs.inventory[0] + costs.shipping[0] + costs.platform[0] + costs.marketing[0] + costs.legal[0] + costs.working[0];
-    const totalMax = costs.sourcing[1] + costs.inventory[1] + costs.shipping[1] + costs.platform[1] + costs.marketing[1] + costs.legal[1] + costs.working[1];
-
     // Display cost breakdown
     const costItemsHTML = `
       ${summaryStatsHTML}
@@ -743,57 +757,58 @@ const metadata = {
           <div class="cost-label">Product Development</div>
           <div class="cost-description">Samples, supplier setup, testing</div>
         </div>
-        <div class="cost-value">${costs.sourcing[0].toLocaleString()} - ${costs.sourcing[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.sourcing[0].toLocaleString()} - $${costs.sourcing[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Initial Inventory</div>
           <div class="cost-description">First production run (MOQ)</div>
         </div>
-        <div class="cost-value">${costs.inventory[0].toLocaleString()} - ${costs.inventory[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.inventory[0].toLocaleString()} - $${costs.inventory[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Shipping & Duties</div>
           <div class="cost-description">Import costs and logistics</div>
         </div>
-        <div class="cost-value">${costs.shipping[0].toLocaleString()} - ${costs.shipping[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.shipping[0].toLocaleString()} - $${costs.shipping[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Website & Platform</div>
           <div class="cost-description">Store setup and payment processing</div>
         </div>
-        <div class="cost-value">${costs.platform[0].toLocaleString()} - ${costs.platform[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.platform[0].toLocaleString()} - $${costs.platform[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Marketing Launch</div>
           <div class="cost-description">First 3 months customer acquisition</div>
         </div>
-        <div class="cost-value">${costs.marketing[0].toLocaleString()} - ${costs.marketing[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.marketing[0].toLocaleString()} - $${costs.marketing[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Legal & Compliance</div>
           <div class="cost-description">Business setup and insurance</div>
         </div>
-        <div class="cost-value">${costs.legal[0].toLocaleString()} - ${costs.legal[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.legal[0].toLocaleString()} - $${costs.legal[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div>
           <div class="cost-label">Working Capital</div>
           <div class="cost-description">Operating buffer and unexpected costs</div>
         </div>
-        <div class="cost-value">${costs.working[0].toLocaleString()} - ${costs.working[1].toLocaleString()}</div>
+        <div class="cost-value">$${costs.working[0].toLocaleString()} - $${costs.working[1].toLocaleString()}</div>
       </div>
       <div class="cost-item">
         <div class="cost-label">Total Launch Investment</div>
-        <div class="cost-value">${totalMin.toLocaleString()} - ${totalMax.toLocaleString()}</div>
+        <div class="cost-value">$${totalMin.toLocaleString()} - $${totalMax.toLocaleString()}</div>
       </div>
     `;
 
-    document.getElementById('costItems').innerHTML = costItemsHTML;
+    const costItemsContainer = document.getElementById('costItems');
+    if (costItemsContainer) costItemsContainer.innerHTML = costItemsHTML;
 
     // Display considerations
     let considerationsHTML = '<ul>';
@@ -801,27 +816,35 @@ const metadata = {
       considerationsHTML += `<li>${consideration}</li>`;
     });
     considerationsHTML += '</ul>';
-    document.getElementById('considerationsContent').innerHTML = considerationsHTML;
+    
+    const considerationsContainer = document.getElementById('considerationsContent');
+    if (considerationsContainer) considerationsContainer.innerHTML = considerationsHTML;
   }
 
   function showLoading() {
-    document.getElementById('loading').classList.add('show');
+    const loading = document.getElementById('loading');
+    if (loading) loading.classList.add('show');
   }
 
   function hideLoading() {
-    document.getElementById('loading').classList.remove('show');
+    const loading = document.getElementById('loading');
+    if (loading) loading.classList.remove('show');
   }
 
   function showResults() {
-    document.getElementById('results').classList.add('show');
+    const results = document.getElementById('results');
+    if (results) results.classList.add('show');
   }
 
   function showError(message) {
-    document.getElementById('errorMessage').textContent = message;
-    document.getElementById('error').classList.add('show');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorDiv = document.getElementById('error');
+    if (errorMessage) errorMessage.textContent = message;
+    if (errorDiv) errorDiv.classList.add('show');
   }
 
   function hideError() {
-    document.getElementById('error').classList.remove('show');
+    const errorDiv = document.getElementById('error');
+    if (errorDiv) errorDiv.classList.remove('show');
   }
 </script>
