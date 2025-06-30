@@ -147,6 +147,22 @@ const metadata = {
 </Layout>
 
 <style>
+  /* Reset and ensure our styles take priority */
+  .calculator-page,
+  .calculator-page * {
+    box-sizing: border-box !important;
+  }
+
+  /* Override any existing margin/padding */
+  .calculator-page .section-title,
+  .calculator-page .summary-grid,
+  .calculator-page .cost-breakdown,
+  .calculator-page .total-investment-banner,
+  .calculator-page .considerations {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .calculator-page {
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
     min-height: 100vh;
@@ -199,11 +215,12 @@ const metadata = {
     50% { background-position: 100% 50%; }
   }
 
-  .calculator-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
+  .calculator-page .calculator-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+    margin-bottom: 40px !important;
+    align-items: start !important;
   }
 
   @media (max-width: 768px) {
@@ -225,27 +242,31 @@ const metadata = {
     }
   }
 
-  .input-section, .results-section {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 30px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
-    transition: all 0.3s ease;
+  .calculator-page .input-section, 
+  .calculator-page .results-section {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(59, 130, 246, 0.2) !important;
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1) !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
   }
 
-  .input-section:hover, .results-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
+  .calculator-page .input-section:hover, 
+  .calculator-page .results-section:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15) !important;
   }
 
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    color: #3b82f6;
-    text-align: center;
-    position: relative;
+  .calculator-page .section-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 25px !important;
+    color: #3b82f6 !important;
+    text-align: center !important;
+    position: relative !important;
+    font-weight: 600 !important;
   }
 
   .section-title::after {
@@ -383,107 +404,118 @@ const metadata = {
     line-height: 1.6;
   }
 
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
+  .calculator-page .summary-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 15px !important;
+    margin-bottom: 25px !important;
   }
 
-  .summary-card {
-    background: rgba(255, 255, 255, 0.6);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(59, 130, 246, 0.1);
-    transition: all 0.3s ease;
+  .calculator-page .summary-card {
+    background: rgba(255, 255, 255, 0.6) !important;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+    border: 1px solid rgba(59, 130, 246, 0.1) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1) !important;
   }
 
-  .summary-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+  .calculator-page .summary-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
   }
 
-  .summary-value {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #3b82f6;
-    margin-bottom: 5px;
+  .calculator-page .summary-value {
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    color: #3b82f6 !important;
+    margin-bottom: 5px !important;
+    line-height: 1.2 !important;
   }
 
-  .summary-label {
-    font-size: 0.85rem;
-    color: #6c757d;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  .calculator-page .summary-label {
+    font-size: 0.85rem !important;
+    color: #6c757d !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.3 !important;
   }
 
-  .cost-breakdown {
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(59, 130, 246, 0.1);
+  .calculator-page .cost-breakdown {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 25px !important;
+    border: 1px solid rgba(59, 130, 246, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.08) !important;
   }
 
-  .cost-breakdown h3 {
-    margin-bottom: 20px;
-    color: #3b82f6;
-    font-size: 1.3rem;
-    text-align: center;
+  .calculator-page .cost-breakdown h3 {
+    margin-bottom: 20px !important;
+    color: #3b82f6 !important;
+    font-size: 1.3rem !important;
+    text-align: center !important;
+    font-weight: 600 !important;
   }
 
-  .cost-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+  .calculator-page .cost-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(59, 130, 246, 0.2) !important;
+    background: white !important;
   }
 
-  .cost-table th {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-    padding: 15px;
-    text-align: left;
-    font-weight: 600;
-    color: #3b82f6;
-    font-size: 0.95rem;
+  .calculator-page .cost-table th {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)) !important;
+    padding: 15px !important;
+    text-align: left !important;
+    font-weight: 600 !important;
+    color: #3b82f6 !important;
+    font-size: 0.95rem !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important;
   }
 
-  .cost-table th:last-child {
-    text-align: right;
+  .calculator-page .cost-table th:last-child {
+    text-align: right !important;
   }
 
-  .cost-table td {
-    padding: 15px;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-    font-size: 0.95rem;
+  .calculator-page .cost-table td {
+    padding: 15px !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1) !important;
+    font-size: 0.95rem !important;
+    background: white !important;
   }
 
-  .cost-table tbody tr:hover {
-    background-color: rgba(59, 130, 246, 0.05);
+  .calculator-page .cost-table tbody tr:hover {
+    background-color: rgba(59, 130, 246, 0.05) !important;
   }
 
-  .cost-table tbody tr:last-child td {
-    border-bottom: none;
+  .calculator-page .cost-table tbody tr:last-child td {
+    border-bottom: none !important;
   }
 
-  .cost-category {
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 2px;
+  .calculator-page .cost-category {
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    margin-bottom: 2px !important;
+    font-size: 1rem !important;
   }
 
-  .cost-description {
-    font-size: 0.85rem;
-    color: #6c757d;
+  .calculator-page .cost-description {
+    font-size: 0.85rem !important;
+    color: #6c757d !important;
+    line-height: 1.4 !important;
   }
 
-  .cost-range {
-    text-align: right;
-    font-weight: 600;
-    color: #3b82f6;
+  .calculator-page .cost-range {
+    text-align: right !important;
+    font-weight: 600 !important;
+    color: #3b82f6 !important;
+    font-size: 1rem !important;
   }
 
   .total-investment-banner {
@@ -543,43 +575,44 @@ const metadata = {
     z-index: 1;
   }
 
-  .considerations {
-    background: rgba(254, 243, 199, 0.8);
-    border: 1px solid #f59e0b;
-    border-radius: 12px;
-    padding: 20px;
+  .calculator-page .considerations {
+    background: rgba(254, 243, 199, 0.8) !important;
+    border: 1px solid #f59e0b !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
   }
 
-  .considerations h3 {
-    color: #92400e;
-    margin-bottom: 15px;
-    font-size: 1.25rem;
+  .calculator-page .considerations h3 {
+    color: #92400e !important;
+    margin-bottom: 15px !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
   }
 
-  .considerations ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .calculator-page .considerations ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  .considerations li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 10px;
-    color: #92400e;
-    font-size: 0.95rem;
-    line-height: 1.5;
+  .calculator-page .considerations li {
+    position: relative !important;
+    padding-left: 24px !important;
+    margin-bottom: 10px !important;
+    color: #92400e !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
   }
 
-  .considerations li:before {
-    content: "⚠️";
-    position: absolute;
-    left: 0;
-    top: 0;
+  .calculator-page .considerations li:before {
+    content: "⚠️" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
   }
 
-  .considerations li:last-child {
-    margin-bottom: 0;
+  .calculator-page .considerations li:last-child {
+    margin-bottom: 0 !important;
   }
 
   .floating-elements {
