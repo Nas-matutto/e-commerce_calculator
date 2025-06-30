@@ -439,184 +439,65 @@ const metadata = {
   }
 </style>
 
-<script is:inline>
-  // Global functions that will always work
-  window.analyzeProduct = async function() {
-    console.log('🚀 Analyze button clicked');
-    
-    const productDescription = document.getElementById('productDescription')?.value?.trim();
-    const targetMarket = document.getElementById('targetMarket')?.value?.trim();
-    
-    console.log('Product description:', productDescription);
-    console.log('Target market:', targetMarket);
-    
-    // Reset UI
-    hideError();
-    hideResults();
-    
-    // Validation
-    if (!productDescription) {
-      showError('Please describe the product you want to sell');
-      return;
-    }
-    
-    // Show loading
-    showLoading();
-    disableButton();
-    
-    try {
-      console.log('🔄 Starting analysis...');
-      const analysis = await getProductAnalysis(productDescription, targetMarket);
-      console.log('✅ Analysis complete:', analysis);
-      displayResults(analysis);
-      showResults();
-    } catch (error) {
-      console.error('❌ Analysis error:', error);
-      showError(error.message);
-    } finally {
-      hideLoading();
-      enableButton();
-    }
-  };
+<script>
+console.log('🚀 Script loading...');
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🎯 DOM loaded');
   
-  async function getProductAnalysis(productDescription, targetMarket) {
-    console.log('📡 Making API call...');
-    
-    try {
-      const response = await fetch('/api/analyze-product', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          productDescription,
-          targetMarket
-        })
-      });
+  const analyzeBtn = document.querySelector('.analyze-btn');
+  console.log('Button found:', !!analyzeBtn);
+  
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      console.log('🎉 Button clicked!');
       
-      console.log('📡 Response status:', response.status);
-      console.log('📡 Response ok:', response.ok);
+      const productDescription = document.getElementById('productDescription')?.value?.trim();
+      console.log('Product description:', productDescription);
       
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('📡 API Error:', errorData);
-        throw new Error(errorData.error || `API Error: ${response.status}`);
+      if (!productDescription) {
+        alert('Please describe the product you want to sell');
+        return;
       }
       
-      const analysis = await response.json();
-      console.log('📡 Analysis received:', analysis);
-      return analysis;
+      // Show loading
+      analyzeBtn.disabled = true;
+      analyzeBtn.textContent = 'Analyzing...';
       
-    } catch (error) {
-      console.error('📡 Fetch error:', error);
-      throw error;
-    }
-  }
-  
-  function displayResults(analysis) {
-    console.log('🎨 Displaying results...');
-    
-    // Hide placeholder
-    const placeholder = document.getElementById('placeholder');
-    if (placeholder) placeholder.style.display = 'none';
-    
-    // Update analysis rationale
-    const rationale = document.getElementById('analysisRationale');
-    if (rationale) rationale.textContent = analysis.analysisRationale;
-    
-    // Display cost breakdown
-    const costItemsContainer = document.getElementById('costItems');
-    if (!costItemsContainer) {
-      console.error('Cost items container not found');
-      return;
-    }
-    
-    let costItemsHTML = '';
-    
-    analysis.costs.forEach(cost => {
-      costItemsHTML += `
-        <div class="cost-item">
-          <div>
-            <div class="cost-label">${cost.category}</div>
-            <small style="color: #6c757d;">${cost.details}</small>
-          </div>
-          <div class="cost-value">${cost.amount}</div>
-        </div>
-      `;
+      try {
+        console.log('📡 Making API call...');
+        
+        const response = await fetch('/api/analyze-product', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            productDescription: productDescription,
+            targetMarket: document.getElementById('targetMarket')?.value?.trim() || ''
+          })
+        });
+        
+        console.log('📡 Response:', response.status, response.ok);
+        
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('📡 Data received:', data);
+        
+        alert('Analysis complete! Check console for results.');
+        
+      } catch (error) {
+        console.error('❌ Error:', error);
+        alert('Error: ' + error.message);
+      } finally {
+        analyzeBtn.disabled = false;
+        analyzeBtn.textContent = 'Analyze Launch Costs';
+      }
     });
-    
-    // Add total
-    costItemsHTML += `
-      <div class="cost-item">
-        <div class="cost-label">Total Estimated Launch Cost</div>
-        <div class="cost-value">${analysis.totalCost}</div>
-      </div>
-    `;
-    
-    costItemsContainer.innerHTML = costItemsHTML;
-    
-    // Display considerations
-    const considerationsContainer = document.getElementById('considerationsContent');
-    if (considerationsContainer) {
-      let considerationsHTML = '<ul>';
-      analysis.considerations.forEach(consideration => {
-        considerationsHTML += `<li>${consideration}</li>`;
-      });
-      considerationsHTML += '</ul>';
-      considerationsContainer.innerHTML = considerationsHTML;
-    }
-    
-    console.log('🎨 Results displayed successfully');
   }
-  
-  function showLoading() {
-    const loading = document.querySelector('.loading');
-    if (loading) loading.classList.add('show');
-  }
-  
-  function hideLoading() {
-    const loading = document.querySelector('.loading');
-    if (loading) loading.classList.remove('show');
-  }
-  
-  function showResults() {
-    const results = document.querySelector('.results');
-    if (results) results.classList.add('show');
-  }
-  
-  function hideResults() {
-    const results = document.querySelector('.results');
-    if (results) results.classList.remove('show');
-  }
-  
-  function showError(message) {
-    const errorMessage = document.getElementById('errorMessage');
-    const errorDiv = document.querySelector('.error');
-    if (errorMessage) errorMessage.textContent = message;
-    if (errorDiv) errorDiv.classList.add('show');
-  }
-  
-  function hideError() {
-    const errorDiv = document.querySelector('.error');
-    if (errorDiv) errorDiv.classList.remove('show');
-  }
-  
-  function disableButton() {
-    const btn = document.querySelector('.analyze-btn');
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = 'Analyzing...';
-    }
-  }
-  
-  function enableButton() {
-    const btn = document.querySelector('.analyze-btn');
-    if (btn) {
-      btn.disabled = false;
-      btn.textContent = 'Analyze Launch Costs';
-    }
-  }
-
-  // Test script loading
-  console.log('🚀 Launch cost estimator script loaded successfully');
+});
 </script>
