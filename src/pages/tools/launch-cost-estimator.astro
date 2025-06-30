@@ -11,26 +11,26 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <!-- Calculator Content -->
-  <div class="calculator-page">
-    <div class="floating-elements">
-      <div class="floating-circle"></div>
-      <div class="floating-circle"></div>
-      <div class="floating-circle"></div>
+  <div class="calculator-page" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%); min-height: 100vh; color: #0f172a; overflow-x: hidden; padding-top: 80px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;">
+    <div class="floating-elements" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">
+      <div class="floating-circle" style="position: absolute; border-radius: 50%; background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); animation: float 6s ease-in-out infinite; width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+      <div class="floating-circle" style="position: absolute; border-radius: 50%; background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); animation: float 6s ease-in-out infinite; width: 120px; height: 120px; top: 60%; right: 15%; animation-delay: 2s;"></div>
+      <div class="floating-circle" style="position: absolute; border-radius: 50%; background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); animation: float 6s ease-in-out infinite; width: 60px; height: 60px; bottom: 20%; left: 20%; animation-delay: 4s;"></div>
     </div>
 
-    <div class="container">
-      <div class="header">
-        <h1>E-commerce Brand Launch Cost Estimator</h1>
-        <p>Calculate estimated costs for launching your e-commerce brand</p>
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px; min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center;">
+      <div class="header" style="text-align: center; margin-bottom: 40px; position: relative;">
+        <h1 style="font-size: 3rem; font-weight: 700; background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ef4444); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 3s ease-in-out infinite; text-shadow: 0 0 30px rgba(59, 130, 246, 0.3); margin: 0;">E-commerce Brand Launch Cost Estimator</h1>
+        <p style="font-size: 1.2rem; color: #475569; margin-top: 10px;">Calculate estimated costs for launching your e-commerce brand</p>
       </div>
 
-      <div class="calculator-grid">
-        <div class="input-section">
-          <h2 class="section-title">Product Information</h2>
+      <div class="calculator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+        <div class="input-section" style="background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); transition: all 0.3s ease;">
+          <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 25px; color: #3b82f6; text-align: center; position: relative; font-weight: 600;">Product Information</h2>
           
-          <div class="input-group">
-            <label for="productType">Product Category</label>
-            <select id="productType">
+          <div class="input-group" style="margin-bottom: 20px;">
+            <label for="productType" style="display: block; margin-bottom: 8px; font-weight: 600; color: #0f172a; font-size: 0.95rem;">Product Category</label>
+            <select id="productType" style="width: 100%; padding: 15px 20px; border: 2px solid rgba(59, 130, 246, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.7); color: #0f172a; font-size: 1rem; transition: all 0.3s ease; backdrop-filter: blur(5px);">
               <option value="">Select a category</option>
               <option value="electronics">Electronics & Tech</option>
               <option value="fashion">Fashion & Apparel</option>
@@ -45,44 +45,44 @@ const metadata = {
             </select>
           </div>
 
-          <div class="input-group">
-            <label for="targetPrice">Target Product Price ($)</label>
-            <input type="number" id="targetPrice" placeholder="e.g., 29" min="5" max="500">
+          <div class="input-group" style="margin-bottom: 20px;">
+            <label for="targetPrice" style="display: block; margin-bottom: 8px; font-weight: 600; color: #0f172a; font-size: 0.95rem;">Target Product Price ($)</label>
+            <input type="number" id="targetPrice" placeholder="e.g., 29" min="5" max="500" style="width: 100%; padding: 15px 20px; border: 2px solid rgba(59, 130, 246, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.7); color: #0f172a; font-size: 1rem; transition: all 0.3s ease; backdrop-filter: blur(5px);">
           </div>
 
-          <div class="input-group">
-            <label for="businessScale">Launch Strategy</label>
-            <select id="businessScale">
+          <div class="input-group" style="margin-bottom: 20px;">
+            <label for="businessScale" style="display: block; margin-bottom: 8px; font-weight: 600; color: #0f172a; font-size: 0.95rem;">Launch Strategy</label>
+            <select id="businessScale" style="width: 100%; padding: 15px 20px; border: 2px solid rgba(59, 130, 246, 0.2); border-radius: 12px; background: rgba(255, 255, 255, 0.7); color: #0f172a; font-size: 1rem; transition: all 0.3s ease; backdrop-filter: blur(5px);">
               <option value="small">Conservative Start ($3K-8K)</option>
               <option value="medium">Balanced Growth ($5K-15K)</option>
               <option value="large">Aggressive Launch ($8K-25K)</option>
             </select>
           </div>
 
-          <button class="calculate-btn" id="analyze-button">
+          <button class="calculate-btn" id="analyze-button" style="width: 100%; padding: 15px 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 10px;">
             Calculate Launch Costs
           </button>
 
-          <div class="loading" id="loading">
-            <div class="spinner"></div>
+          <div class="loading" id="loading" style="display: none; text-align: center; color: #3b82f6; margin-top: 20px;">
+            <div class="spinner" style="border: 3px solid #f3f3f3; border-top: 3px solid #3b82f6; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 10px;"></div>
             <p>Calculating your launch costs...</p>
           </div>
 
-          <div class="error" id="error">
+          <div class="error" id="error" style="background: rgba(254, 242, 242, 0.9); color: #dc2626; padding: 15px; border-radius: 8px; margin-top: 20px; display: none; border: 1px solid #fca5a5;">
             <p id="errorMessage"></p>
           </div>
         </div>
 
-        <div class="results-section">
-          <h2 class="section-title">Launch Cost Analysis</h2>
+        <div class="results-section" style="background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1); transition: all 0.3s ease;">
+          <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 25px; color: #3b82f6; text-align: center; position: relative; font-weight: 600;">Launch Cost Analysis</h2>
           
-          <div class="results" id="results">
-            <div class="summary-grid" id="summaryGrid">
+          <div class="results" id="results" style="display: none;">
+            <div class="summary-grid" id="summaryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 25px;">
               <!-- Summary stats will be populated here -->
             </div>
             
-            <div class="cost-breakdown">
-              <h3>Cost Breakdown</h3>
+            <div class="cost-breakdown" style="background: rgba(255, 255, 255, 0.6); border-radius: 16px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(59, 130, 246, 0.1); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.08);">
+              <h3 style="margin-bottom: 20px; color: #3b82f6; font-size: 1.3rem; text-align: center; font-weight: 600;">Cost Breakdown</h3>
               <div id="costTableContainer">
                 <!-- Cost table will be populated here -->
               </div>
@@ -92,25 +92,25 @@ const metadata = {
               <!-- Total investment will be populated here -->
             </div>
             
-            <div class="considerations">
-              <h3>Key Considerations</h3>
+            <div class="considerations" style="background: rgba(254, 243, 199, 0.8); border: 1px solid #f59e0b; border-radius: 12px; padding: 20px;">
+              <h3 style="color: #92400e; margin-bottom: 15px; font-size: 1.25rem; font-weight: 600;">Key Considerations</h3>
               <div id="considerationsContent">
                 <!-- Considerations will be populated here -->
               </div>
             </div>
           </div>
           
-          <div class="placeholder" id="placeholder">
-            <div class="placeholder-icon">📊</div>
-            <h3>Ready to Calculate</h3>
-            <p>Enter your product details on the left to see detailed cost estimates for launching your e-commerce brand</p>
+          <div class="placeholder" id="placeholder" style="text-align: center; color: #6c757d; margin-top: 30px;">
+            <div class="placeholder-icon" style="font-size: 3rem; margin-bottom: 16px;">📊</div>
+            <h3 style="font-size: 1.5rem; font-weight: 600; color: #374151; margin-bottom: 8px;">Ready to Calculate</h3>
+            <p style="font-size: 1rem; line-height: 1.6;">Enter your product details on the left to see detailed cost estimates for launching your e-commerce brand</p>
           </div>
         </div>
       </div>
 
       <!-- Back to home button -->
       <div style="text-align: center; margin: 40px 0;">
-        <a href="/" class="btn btn-secondary">← Back to Home</a>
+        <a href="/" style="display: inline-block; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(10px); background: transparent; color: #3b82f6; border: 2px solid #3b82f6;">← Back to Home</a>
       </div>
     </div>
   </div>
@@ -147,221 +147,9 @@ const metadata = {
 </Layout>
 
 <style>
-  /* Reset and ensure our styles take priority */
-  .calculator-page,
-  .calculator-page * {
-    box-sizing: border-box !important;
-  }
-
-  /* Override any existing margin/padding */
-  .calculator-page .section-title,
-  .calculator-page .summary-grid,
-  .calculator-page .cost-breakdown,
-  .calculator-page .total-investment-banner,
-  .calculator-page .considerations {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .calculator-page {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
-    min-height: 100vh;
-    color: #0f172a;
-    overflow-x: hidden;
-    padding-top: 80px;
-  }
-
-  .calculator-page * {
-    box-sizing: border-box;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-  }
-
-  .header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ef4444);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 3s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-    margin: 0;
-  }
-
-  .header p {
-    font-size: 1.2rem;
-    color: #475569;
-    margin-top: 10px;
-  }
-
   @keyframes gradientShift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-  }
-
-  .calculator-page .calculator-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 40px !important;
-    margin-bottom: 40px !important;
-    align-items: start !important;
-  }
-
-  @media (max-width: 768px) {
-    .calculator-grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    
-    .header h1 {
-      font-size: 2.2rem;
-    }
-    
-    .container {
-      padding: 15px;
-    }
-    
-    .input-section, .results-section {
-      padding: 20px;
-    }
-  }
-
-  .calculator-page .input-section, 
-  .calculator-page .results-section {
-    background: rgba(255, 255, 255, 0.9) !important;
-    border-radius: 20px !important;
-    padding: 30px !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(59, 130, 246, 0.2) !important;
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1) !important;
-    transition: all 0.3s ease !important;
-    margin: 0 !important;
-  }
-
-  .calculator-page .input-section:hover, 
-  .calculator-page .results-section:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15) !important;
-  }
-
-  .calculator-page .section-title {
-    font-size: 1.8rem !important;
-    margin-bottom: 25px !important;
-    color: #3b82f6 !important;
-    text-align: center !important;
-    position: relative !important;
-    font-weight: 600 !important;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    border-radius: 2px;
-  }
-
-  .input-group {
-    margin-bottom: 20px;
-  }
-
-  .input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #0f172a;
-    font-size: 0.95rem;
-  }
-
-  .input-group input, .input-group select {
-    width: 100%;
-    padding: 15px 20px;
-    border: 2px solid rgba(59, 130, 246, 0.2);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.7);
-    color: #0f172a;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-  }
-
-  .input-group input:focus, .input-group select:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-  }
-
-  .input-group input::placeholder {
-    color: #94a3b8;
-  }
-
-  .calculate-btn {
-    width: 100%;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-  }
-
-  .calculate-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-  }
-
-  .calculate-btn:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
-
-  .loading {
-    display: none;
-    text-align: center;
-    color: #3b82f6;
-    margin-top: 20px;
-  }
-
-  .loading.show {
-    display: block;
-  }
-
-  .spinner {
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3b82f6;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 10px;
   }
 
   @keyframes spin {
@@ -369,176 +157,9 @@ const metadata = {
     100% { transform: rotate(360deg); }
   }
 
-  .results {
-    display: none;
-  }
-
-  .results.show {
-    display: block;
-  }
-
-  .placeholder {
-    text-align: center;
-    color: #6c757d;
-    margin-top: 30px;
-  }
-
-  .placeholder.hide {
-    display: none;
-  }
-
-  .placeholder-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-
-  .placeholder h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 8px;
-  }
-
-  .placeholder p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .calculator-page .summary-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
-    gap: 15px !important;
-    margin-bottom: 25px !important;
-  }
-
-  .calculator-page .summary-card {
-    background: rgba(255, 255, 255, 0.6) !important;
-    padding: 20px !important;
-    border-radius: 12px !important;
-    text-align: center !important;
-    border: 1px solid rgba(59, 130, 246, 0.1) !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1) !important;
-  }
-
-  .calculator-page .summary-card:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
-  }
-
-  .calculator-page .summary-value {
-    font-size: 1.8rem !important;
-    font-weight: 700 !important;
-    color: #3b82f6 !important;
-    margin-bottom: 5px !important;
-    line-height: 1.2 !important;
-  }
-
-  .calculator-page .summary-label {
-    font-size: 0.85rem !important;
-    color: #6c757d !important;
-    font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    line-height: 1.3 !important;
-  }
-
-  .calculator-page .cost-breakdown {
-    background: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 16px !important;
-    padding: 25px !important;
-    margin-bottom: 25px !important;
-    border: 1px solid rgba(59, 130, 246, 0.1) !important;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.08) !important;
-  }
-
-  .calculator-page .cost-breakdown h3 {
-    margin-bottom: 20px !important;
-    color: #3b82f6 !important;
-    font-size: 1.3rem !important;
-    text-align: center !important;
-    font-weight: 600 !important;
-  }
-
-  .calculator-page .cost-table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    border-radius: 8px !important;
-    overflow: hidden !important;
-    border: 1px solid rgba(59, 130, 246, 0.2) !important;
-    background: white !important;
-  }
-
-  .calculator-page .cost-table th {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)) !important;
-    padding: 15px !important;
-    text-align: left !important;
-    font-weight: 600 !important;
-    color: #3b82f6 !important;
-    font-size: 0.95rem !important;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important;
-  }
-
-  .calculator-page .cost-table th:last-child {
-    text-align: right !important;
-  }
-
-  .calculator-page .cost-table td {
-    padding: 15px !important;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.1) !important;
-    font-size: 0.95rem !important;
-    background: white !important;
-  }
-
-  .calculator-page .cost-table tbody tr:hover {
-    background-color: rgba(59, 130, 246, 0.05) !important;
-  }
-
-  .calculator-page .cost-table tbody tr:last-child td {
-    border-bottom: none !important;
-  }
-
-  .calculator-page .cost-category {
-    font-weight: 600 !important;
-    color: #0f172a !important;
-    margin-bottom: 2px !important;
-    font-size: 1rem !important;
-  }
-
-  .calculator-page .cost-description {
-    font-size: 0.85rem !important;
-    color: #6c757d !important;
-    line-height: 1.4 !important;
-  }
-
-  .calculator-page .cost-range {
-    text-align: right !important;
-    font-weight: 600 !important;
-    color: #3b82f6 !important;
-    font-size: 1rem !important;
-  }
-
-  .total-investment-banner {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    color: white;
-    border-radius: 16px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
-    margin-bottom: 25px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .total-investment-banner::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: shimmer 3s ease-in-out infinite;
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
   }
 
   @keyframes shimmer {
@@ -546,303 +167,53 @@ const metadata = {
     50% { transform: rotate(180deg); }
   }
 
-  .total-investment-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-    opacity: 0.9;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-  }
-
-  .total-investment-amount {
-    font-size: 2.4rem;
-    font-weight: 900;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    line-height: 1;
-    position: relative;
-    z-index: 1;
-  }
-
-  .total-investment-subtitle {
-    font-size: 1rem;
-    opacity: 0.8;
-    font-weight: 400;
-    position: relative;
-    z-index: 1;
-  }
-
-  .calculator-page .considerations {
-    background: rgba(254, 243, 199, 0.8) !important;
-    border: 1px solid #f59e0b !important;
-    border-radius: 12px !important;
-    padding: 20px !important;
-  }
-
-  .calculator-page .considerations h3 {
-    color: #92400e !important;
-    margin-bottom: 15px !important;
-    font-size: 1.25rem !important;
-    font-weight: 600 !important;
-  }
-
-  .calculator-page .considerations ul {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .calculator-page .considerations li {
-    position: relative !important;
-    padding-left: 24px !important;
-    margin-bottom: 10px !important;
-    color: #92400e !important;
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-  }
-
-  .calculator-page .considerations li:before {
-    content: "⚠️" !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-  }
-
-  .calculator-page .considerations li:last-child {
-    margin-bottom: 0 !important;
-  }
-
-  .floating-elements {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-  }
-
   .floating-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
     animation: float 6s ease-in-out infinite;
   }
 
-  .floating-circle:nth-child(1) {
-    width: 80px;
-    height: 80px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
+  .calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
   }
 
-  .floating-circle:nth-child(2) {
-    width: 120px;
-    height: 120px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
+  .input-section:hover, .results-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
   }
 
-  .floating-circle:nth-child(3) {
-    width: 60px;
-    height: 60px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 4s;
+  .loading.show {
+    display: block !important;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
+  .results.show {
+    display: block !important;
   }
 
-  .error {
-    background: rgba(254, 242, 242, 0.9);
-    color: #dc2626;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 20px;
-    display: none;
-    border: 1px solid #fca5a5;
+  .placeholder.hide {
+    display: none !important;
   }
 
   .error.show {
-    display: block;
+    display: block !important;
   }
 
-  /* Button styles */
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: #3b82f6;
-    border: 2px solid #3b82f6;
-  }
-
-  .btn-secondary:hover {
-    background: #3b82f6;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-  }
-
-  @media (max-width: 480px) {
-    .summary-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 768px) {
+    .calculator-grid {
+      grid-template-columns: 1fr !important;
+      gap: 30px !important;
     }
-
-    .cost-table th,
-    .cost-table td {
-      padding: 12px 8px;
-      font-size: 0.85rem;
+    
+    .header h1 {
+      font-size: 2.2rem !important;
     }
-
-    .total-investment-amount {
-      font-size: 2rem;
+    
+    .container {
+      padding: 15px !important;
     }
-  }
-
-  /* Dark mode support */
-  :global(.dark) .calculator-page {
-    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-    color: #ffffff;
-  }
-
-  :global(.dark) .header p {
-    color: #a0a0a0;
-  }
-
-  :global(.dark) .header h1 {
-    background: linear-gradient(45deg, #00d4ff, #5865f2, #ff6b6b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-  }
-
-  :global(.dark) .input-section,
-  :global(.dark) .results-section {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  :global(.dark) .section-title {
-    color: #00d4ff;
-  }
-
-  :global(.dark) .section-title::after {
-    background: linear-gradient(90deg, #00d4ff, #5865f2);
-  }
-
-  :global(.dark) .input-group label {
-    color: #e0e0e0;
-  }
-
-  :global(.dark) .input-group input,
-  :global(.dark) .input-group select {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-  }
-
-  :global(.dark) .input-group input:focus,
-  :global(.dark) .input-group select:focus {
-    border-color: #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  :global(.dark) .summary-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  :global(.dark) .summary-value {
-    color: #00d4ff;
-  }
-
-  :global(.dark) .summary-label {
-    color: #a0a0a0;
-  }
-
-  :global(.dark) .cost-breakdown {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  :global(.dark) .cost-breakdown h3 {
-    color: #00d4ff;
-  }
-
-  :global(.dark) .cost-table th {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
-    color: #00d4ff;
-  }
-
-  :global(.dark) .cost-table tbody tr:hover {
-    background-color: rgba(0, 212, 255, 0.05);
-  }
-
-  :global(.dark) .cost-category {
-    color: #ffffff;
-  }
-
-  :global(.dark) .cost-description {
-    color: #a0a0a0;
-  }
-
-  :global(.dark) .cost-range {
-    color: #00d4ff;
-  }
-
-  :global(.dark) .total-investment-banner {
-    background: linear-gradient(135deg, #00d4ff 0%, #5865f2 100%);
-  }
-
-  :global(.dark) .considerations {
-    background: rgba(0, 212, 255, 0.1);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-  }
-
-  :global(.dark) .considerations h3,
-  :global(.dark) .considerations li {
-    color: #00d4ff;
-  }
-
-  :global(.dark) .floating-circle {
-    background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(88, 101, 242, 0.1));
-  }
-
-  :global(.dark) .btn-secondary {
-    color: #00d4ff;
-    border-color: #00d4ff;
-  }
-
-  :global(.dark) .btn-secondary:hover {
-    background: #00d4ff;
-    color: #0f0f23;
-  }
-
-  :global(.dark) .placeholder h3 {
-    color: #ffffff;
-  }
-
-  :global(.dark) .placeholder {
-    color: #a0a0a0;
+    
+    .input-section, .results-section {
+      padding: 20px !important;
+    }
   }
 </style>
 
@@ -1079,87 +450,87 @@ const metadata = {
     const totalMin = costs.sourcing[0] + costs.inventory[0] + costs.shipping[0] + costs.platform[0] + costs.marketing[0] + costs.legal[0] + costs.working[0];
     const totalMax = costs.sourcing[1] + costs.inventory[1] + costs.shipping[1] + costs.platform[1] + costs.marketing[1] + costs.legal[1] + costs.working[1];
 
-    // Create summary cards
+    // Create summary cards with inline styles
     const summaryHTML = `
-      <div class="summary-card">
-        <div class="summary-value">$${totalMin.toLocaleString()}</div>
-        <div class="summary-label">Minimum Budget</div>
+      <div style="background: rgba(255, 255, 255, 0.6); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.1); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 5px; line-height: 1.2;">$${totalMin.toLocaleString()}</div>
+        <div style="font-size: 0.85rem; color: #6c757d; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;">Minimum Budget</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-value">$${totalMax.toLocaleString()}</div>
-        <div class="summary-label">Recommended Budget</div>
+      <div style="background: rgba(255, 255, 255, 0.6); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.1); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 5px; line-height: 1.2;">$${totalMax.toLocaleString()}</div>
+        <div style="font-size: 0.85rem; color: #6c757d; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;">Recommended Budget</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-value">${Math.round((costs.marketing[0] + costs.marketing[1]) / 2 / ((totalMin + totalMax) / 2) * 100)}%</div>
-        <div class="summary-label">Marketing %</div>
+      <div style="background: rgba(255, 255, 255, 0.6); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.1); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 5px; line-height: 1.2;">${Math.round((costs.marketing[0] + costs.marketing[1]) / 2 / ((totalMin + totalMax) / 2) * 100)}%</div>
+        <div style="font-size: 0.85rem; color: #6c757d; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;">Marketing %</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-value">${Math.round(((totalMin + totalMax) / 2) / targetPrice)}</div>
-        <div class="summary-label">Break Even Units</div>
+      <div style="background: rgba(255, 255, 255, 0.6); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.1); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);">
+        <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6; margin-bottom: 5px; line-height: 1.2;">${Math.round(((totalMin + totalMax) / 2) / targetPrice)}</div>
+        <div style="font-size: 0.85rem; color: #6c757d; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.3;">Break Even Units</div>
       </div>
     `;
 
     const summaryGrid = document.getElementById('summaryGrid');
     if (summaryGrid) summaryGrid.innerHTML = summaryHTML;
 
-    // Create cost breakdown table
+    // Create cost breakdown table with inline styles
     const costTableHTML = `
-      <table class="cost-table">
+      <table style="width: 100%; border-collapse: collapse; border-radius: 8px; overflow: hidden; border: 1px solid rgba(59, 130, 246, 0.2); background: white;">
         <thead>
           <tr>
-            <th>Cost Category</th>
-            <th>Estimated Range</th>
+            <th style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); padding: 15px; text-align: left; font-weight: 600; color: #3b82f6; font-size: 0.95rem; border-bottom: 1px solid rgba(59, 130, 246, 0.2);">Cost Category</th>
+            <th style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); padding: 15px; text-align: right; font-weight: 600; color: #3b82f6; font-size: 0.95rem; border-bottom: 1px solid rgba(59, 130, 246, 0.2);">Estimated Range</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="cost-category">Product Development & Sourcing</div>
-              <div class="cost-description">Initial product development, supplier negotiations, samples</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Product Development & Sourcing</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">Initial product development, supplier negotiations, samples</div>
             </td>
-            <td class="cost-range">$${costs.sourcing[0].toLocaleString()} - $${costs.sourcing[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.sourcing[0].toLocaleString()} - $${costs.sourcing[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Initial Inventory</div>
-              <div class="cost-description">First production run, minimum order quantities</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Initial Inventory</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">First production run, minimum order quantities</div>
             </td>
-            <td class="cost-range">$${costs.inventory[0].toLocaleString()} - $${costs.inventory[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.inventory[0].toLocaleString()} - $${costs.inventory[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Shipping & Import Duties</div>
-              <div class="cost-description">International shipping, customs, warehousing</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Shipping & Import Duties</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">International shipping, customs, warehousing</div>
             </td>
-            <td class="cost-range">$${costs.shipping[0].toLocaleString()} - $${costs.shipping[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.shipping[0].toLocaleString()} - $${costs.shipping[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Website & Platform Setup</div>
-              <div class="cost-description">E-commerce platform, design, payment processing</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Website & Platform Setup</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">E-commerce platform, design, payment processing</div>
             </td>
-            <td class="cost-range">$${costs.platform[0].toLocaleString()} - $${costs.platform[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.platform[0].toLocaleString()} - $${costs.platform[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Marketing & Advertising</div>
-              <div class="cost-description">Paid ads, content creation, influencer partnerships</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Marketing & Advertising</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">Paid ads, content creation, influencer partnerships</div>
             </td>
-            <td class="cost-range">$${costs.marketing[0].toLocaleString()} - $${costs.marketing[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.marketing[0].toLocaleString()} - $${costs.marketing[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Legal & Compliance</div>
-              <div class="cost-description">Business registration, trademarks, insurance</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Legal & Compliance</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">Business registration, trademarks, insurance</div>
             </td>
-            <td class="cost-range">$${costs.legal[0].toLocaleString()} - $${costs.legal[1].toLocaleString()}</td>
+            <td style="padding: 15px; border-bottom: 1px solid rgba(59, 130, 246, 0.1); font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.legal[0].toLocaleString()} - $${costs.legal[1].toLocaleString()}</td>
           </tr>
-          <tr>
-            <td>
-              <div class="cost-category">Working Capital</div>
-              <div class="cost-description">Cash buffer for operations, unexpected costs</div>
+          <tr style="background: white;">
+            <td style="padding: 15px; font-size: 0.95rem;">
+              <div style="font-weight: 600; color: #0f172a; margin-bottom: 2px; font-size: 1rem;">Working Capital</div>
+              <div style="font-size: 0.85rem; color: #6c757d; line-height: 1.4;">Cash buffer for operations, unexpected costs</div>
             </td>
-            <td class="cost-range">$${costs.working[0].toLocaleString()} - $${costs.working[1].toLocaleString()}</td>
+            <td style="padding: 15px; font-size: 0.95rem; text-align: right; font-weight: 600; color: #3b82f6; font-size: 1rem;">$${costs.working[0].toLocaleString()} - $${costs.working[1].toLocaleString()}</td>
           </tr>
         </tbody>
       </table>
@@ -1168,22 +539,22 @@ const metadata = {
     const costTableContainer = document.getElementById('costTableContainer');
     if (costTableContainer) costTableContainer.innerHTML = costTableHTML;
 
-    // Create total section
+    // Create total section with inline styles
     const totalHTML = `
-      <div class="total-investment-banner">
-        <div class="total-investment-title">Total Launch Investment</div>
-        <div class="total-investment-amount">$${totalMin.toLocaleString()} - $${totalMax.toLocaleString()}</div>
-        <div class="total-investment-subtitle">Complete budget for ${businessScale} scale launch</div>
+      <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3); margin-bottom: 25px; position: relative; overflow: hidden;">
+        <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; opacity: 0.9; letter-spacing: 0.5px; text-transform: uppercase; position: relative; z-index: 1;">Total Launch Investment</div>
+        <div style="font-size: 2.4rem; font-weight: 900; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); line-height: 1; position: relative; z-index: 1;">$${totalMin.toLocaleString()} - $${totalMax.toLocaleString()}</div>
+        <div style="font-size: 1rem; opacity: 0.8; font-weight: 400; position: relative; z-index: 1;">Complete budget for ${businessScale} scale launch</div>
       </div>
     `;
 
     const totalSection = document.getElementById('totalSection');
     if (totalSection) totalSection.innerHTML = totalHTML;
 
-    // Display considerations
-    let considerationsHTML = '<ul>';
+    // Display considerations with inline styles
+    let considerationsHTML = '<ul style="list-style: none; margin: 0; padding: 0;">';
     considerations.forEach(consideration => {
-      considerationsHTML += `<li>${consideration}</li>`;
+      considerationsHTML += `<li style="position: relative; padding-left: 24px; margin-bottom: 10px; color: #92400e; font-size: 0.95rem; line-height: 1.5;"><span style="position: absolute; left: 0; top: 0;">⚠️</span>${consideration}</li>`;
     });
     considerationsHTML += '</ul>';
     
