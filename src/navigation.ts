@@ -9,6 +9,10 @@ export const headerData = {
           text: 'E-commerce Profit Calculator',
           href: getPermalink('/tools/E-commerce_calculator'),
         },
+        {
+          text: 'Brand Launch Cost Estimator',
+          href: getPermalink('/tools/launch-cost-estimator'),
+        },
        ],
     },
     {

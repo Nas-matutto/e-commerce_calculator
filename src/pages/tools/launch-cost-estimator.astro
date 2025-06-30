@@ -1,0 +1,611 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'E-commerce Launch Cost Estimator - AI-Powered Budget Calculator',
+  description: 'Get AI-powered cost estimates for launching your e-commerce brand. Calculate product sourcing, inventory, marketing, and total launch costs.',
+  keywords: 'e-commerce launch cost, startup cost calculator, business launch budget, e-commerce cost estimator',
+  canonical: 'https://www.sellingwithnas.com/tools/launch-cost-estimator',
+  
+  openGraph: {
+    basic: {
+      title: 'E-commerce Launch Cost Estimator - AI-Powered Calculator',
+      type: 'website',
+      image: 'https://www.sellingwithnas.com/images/launch-cost-estimator-og.jpg',
+      url: 'https://www.sellingwithnas.com/tools/launch-cost-estimator',
+    },
+    optional: {
+      description: 'Get AI-powered cost estimates for launching your e-commerce brand.',
+      siteName: 'Selling with Nas',
+      locale: 'en_US',
+    }
+  },
+  
+  twitter: {
+    card: 'summary_large_image',
+    title: 'E-commerce Launch Cost Estimator - AI-Powered Calculator',
+    description: 'Get AI-powered cost estimates for launching your e-commerce brand.',
+    image: 'https://www.sellingwithnas.com/images/launch-cost-estimator-og.jpg',
+  },
+  
+  robots: {
+    index: true,
+    follow: true,
+  }
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="container">
+    <div class="header">
+      <h1>E-commerce Brand Launch Cost Estimator</h1>
+      <p>Get AI-powered cost estimates for launching your e-commerce brand</p>
+    </div>
+    
+    <div class="main-content">
+      <div class="input-section">
+        <h2 class="section-title">Product Information</h2>
+        
+        <div class="input-group">
+          <label for="productDescription">Product Description</label>
+          <textarea id="productDescription" placeholder="Describe the product you want to sell (e.g., 'Wireless bluetooth earbuds', 'Organic skincare cream', 'Fitness resistance bands')"></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="targetMarket">Target Market (Optional)</label>
+          <input type="text" id="targetMarket" placeholder="e.g., US, Europe, Global">
+        </div>
+        
+        <button class="analyze-btn" onclick="analyzeProduct()">
+          Analyze Launch Costs
+        </button>
+        
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Analyzing your product and calculating costs...</p>
+        </div>
+        
+        <div class="error">
+          <p id="errorMessage"></p>
+        </div>
+      </div>
+      
+      <div class="results-section">
+        <h2 class="section-title">Cost Analysis</h2>
+        
+        <div class="results">
+          <div style="background: #e8f4fd; border-radius: 12px; padding: 20px; margin-bottom: 25px; border-left: 4px solid #667eea;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">Launch Cost Analysis</h3>
+            <p style="color: #2c3e50; line-height: 1.6;" id="analysisRationale">
+              Based on your product type and market analysis, here's a comprehensive breakdown of the estimated costs to successfully launch your e-commerce brand. These ranges account for different quality levels, market positioning, and scale of operations.
+            </p>
+          </div>
+          
+          <div class="cost-breakdown">
+            <h3 style="margin-bottom: 15px; color: #2c3e50;">Estimated Launch Costs</h3>
+            <div id="costItems">
+              <!-- Example of how the results will look -->
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Product Sourcing & Development</div>
+                  <small style="color: #6c757d;">Initial product development, samples, and supplier setup</small>
+                </div>
+                <div class="cost-value">$2,500 - $8,000</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Initial Inventory (MOQ)</div>
+                  <small style="color: #6c757d;">Minimum order quantity based on supplier requirements</small>
+                </div>
+                <div class="cost-value">$5,000 - $15,000</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Shipping & Import Costs</div>
+                  <small style="color: #6c757d;">International shipping, customs, duties, and local logistics</small>
+                </div>
+                <div class="cost-value">$800 - $2,500</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">E-commerce Platform Setup</div>
+                  <small style="color: #6c757d;">Website development, design, apps, and initial setup</small>
+                </div>
+                <div class="cost-value">$1,200 - $5,000</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Initial Marketing & Customer Acquisition</div>
+                  <small style="color: #6c757d;">First 3 months of advertising, content creation, and brand building</small>
+                </div>
+                <div class="cost-value">$3,000 - $10,000</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Legal & Compliance</div>
+                  <small style="color: #6c757d;">Business registration, trademarks, insurance, and certifications</small>
+                </div>
+                <div class="cost-value">$500 - $2,000</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Working Capital & Miscellaneous</div>
+                  <small style="color: #6c757d;">3-month operational buffer and unexpected expenses</small>
+                </div>
+                <div class="cost-value">$2,000 - $7,500</div>
+              </div>
+              <div class="cost-item">
+                <div>
+                  <div class="cost-label">Total Estimated Launch Cost</div>
+                  <div class="cost-value">$15,000 - $50,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="considerations">
+            <h3>Key Considerations</h3>
+            <div id="considerationsContent">
+              <ul>
+                <li><strong>Import Duties:</strong> Products from China typically face 10-25% import duties depending on category</li>
+                <li><strong>Quality Control:</strong> Budget for product inspections and potential quality issues with first orders</li>
+                <li><strong>Seasonal Demand:</strong> Consider timing your launch around peak selling seasons for your product category</li>
+                <li><strong>Compliance Requirements:</strong> Ensure your product meets safety standards and labeling requirements for your target market</li>
+                <li><strong>Cash Flow Management:</strong> Plan for 60-90 day payment terms with suppliers and delayed revenue cycles</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div style="text-align: center; color: #6c757d; margin-top: 30px;" id="placeholder">
+          <p>Enter your product details on the left to see personalized cost estimates</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 600px;
+  }
+
+  .input-section {
+    padding: 40px;
+    background: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+  }
+
+  .results-section {
+    padding: 40px;
+    background: white;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #2c3e50;
+  }
+
+  .input-group {
+    margin-bottom: 25px;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+
+  .input-group input, .input-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .input-group input:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+
+  .input-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .analyze-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .analyze-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .analyze-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .loading {
+    display: none;
+    text-align: center;
+    color: #667eea;
+    margin-top: 20px;
+  }
+
+  .loading.show {
+    display: block;
+  }
+
+  .spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .results {
+    display: none;
+  }
+
+  .results.show {
+    display: block;
+  }
+
+  .cost-breakdown {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .cost-item:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #667eea;
+  }
+
+  .cost-label {
+    color: #2c3e50;
+  }
+
+  .cost-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .considerations {
+    background: #e7f3ff;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+  }
+
+  .considerations h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  .considerations ul {
+    color: #2c3e50;
+    padding-left: 20px;
+  }
+
+  .considerations li {
+    margin-bottom: 8px;
+  }
+
+  .error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  .error.show {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .input-section {
+      border-right: none;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    .header h1 {
+      font-size: 2rem;
+    }
+  }
+
+  /* Dark mode support */
+  :global(.dark) .container {
+    background: #1e293b;
+  }
+
+  :global(.dark) .input-section {
+    background: #0f172a;
+    color: #ffffff;
+  }
+
+  :global(.dark) .results-section {
+    background: #1e293b;
+    color: #ffffff;
+  }
+
+  :global(.dark) .section-title {
+    color: #ffffff;
+  }
+
+  :global(.dark) .input-group label {
+    color: #e0e0e0;
+  }
+
+  :global(.dark) .input-group input,
+  :global(.dark) .input-group textarea {
+    background: #374151;
+    border-color: #4b5563;
+    color: #ffffff;
+  }
+
+  :global(.dark) .cost-breakdown {
+    background: #374151;
+  }
+
+  :global(.dark) .cost-label,
+  :global(.dark) .cost-value {
+    color: #ffffff;
+  }
+
+  :global(.dark) .considerations {
+    background: #1e3a8a;
+    color: #ffffff;
+  }
+</style>
+
+<script>
+  async function analyzeProduct() {
+    const productDescription = document.getElementById('productDescription').value.trim();
+    const targetMarket = document.getElementById('targetMarket').value.trim();
+    
+    // Reset UI
+    hideError();
+    hideResults();
+    
+    // Validation
+    if (!productDescription) {
+      showError('Please describe the product you want to sell');
+      return;
+    }
+    
+    // Show loading
+    showLoading();
+    disableButton();
+    
+    try {
+      const analysis = await getProductAnalysis(productDescription, targetMarket);
+      displayResults(analysis);
+      showResults();
+    } catch (error) {
+      showError(error.message);
+    } finally {
+      hideLoading();
+      enableButton();
+    }
+  }
+  
+  async function getProductAnalysis(productDescription, targetMarket) {
+    // For now, return a mock analysis based on the product description
+    // You can later implement actual AI integration
+    
+    const mockAnalysis = {
+      analysisRationale: `Based on the product type "${productDescription}" and target market analysis, these estimates reflect current market conditions and typical startup requirements for this category.`,
+      costs: [
+        {
+          category: "Product Sourcing & Development",
+          amount: "$2,500 - $8,000",
+          details: "Initial product development, samples, and supplier setup"
+        },
+        {
+          category: "Initial Inventory (MOQ)",
+          amount: "$5,000 - $15,000", 
+          details: "Minimum order quantity based on supplier requirements"
+        },
+        {
+          category: "Shipping & Import Costs",
+          amount: "$800 - $2,500",
+          details: "International shipping, customs, duties, and local logistics"
+        },
+        {
+          category: "E-commerce Platform Setup",
+          amount: "$1,200 - $5,000",
+          details: "Website development, design, apps, and initial setup"
+        },
+        {
+          category: "Initial Marketing & Customer Acquisition",
+          amount: "$3,000 - $10,000",
+          details: "First 3 months of advertising, content creation, and brand building"
+        },
+        {
+          category: "Legal & Compliance",
+          amount: "$500 - $2,000",
+          details: "Business registration, trademarks, insurance, and certifications"
+        },
+        {
+          category: "Working Capital & Miscellaneous",
+          amount: "$2,000 - $7,500",
+          details: "3-month operational buffer and unexpected expenses"
+        }
+      ],
+      totalCost: "$15,000 - $50,000",
+      considerations: [
+        "Import duties vary by product category, typically 10-25% for products from China",
+        "Quality control is crucial - budget for product inspections and potential issues with first orders",
+        "Consider seasonal demand patterns when timing your launch",
+        "Ensure compliance with safety standards and labeling requirements for your target market",
+        "Plan for 60-90 day payment terms with suppliers and delayed revenue cycles"
+      ]
+    };
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    return mockAnalysis;
+  }
+  
+  function displayResults(analysis) {
+    // Hide placeholder
+    document.getElementById('placeholder').style.display = 'none';
+    
+    // Update analysis rationale
+    document.getElementById('analysisRationale').textContent = analysis.analysisRationale;
+    
+    // Display cost breakdown
+    const costItemsContainer = document.getElementById('costItems');
+    let costItemsHTML = '';
+    
+    analysis.costs.forEach(cost => {
+      costItemsHTML += `
+        <div class="cost-item">
+          <div>
+            <div class="cost-label">${cost.category}</div>
+            <small style="color: #6c757d;">${cost.details}</small>
+          </div>
+          <div class="cost-value">${cost.amount}</div>
+        </div>
+      `;
+    });
+    
+    // Add total
+    costItemsHTML += `
+      <div class="cost-item">
+        <div class="cost-label">Total Estimated Launch Cost</div>
+        <div class="cost-value">${analysis.totalCost}</div>
+      </div>
+    `;
+    
+    costItemsContainer.innerHTML = costItemsHTML;
+    
+    // Display considerations
+    const considerationsContainer = document.getElementById('considerationsContent');
+    let considerationsHTML = '<ul>';
+    analysis.considerations.forEach(consideration => {
+      considerationsHTML += `<li>${consideration}</li>`;
+    });
+    considerationsHTML += '</ul>';
+    considerationsContainer.innerHTML = considerationsHTML;
+  }
+  
+  function showLoading() {
+    document.querySelector('.loading').classList.add('show');
+  }
+  
+  function hideLoading() {
+    document.querySelector('.loading').classList.remove('show');
+  }
+  
+  function showResults() {
+    document.querySelector('.results').classList.add('show');
+  }
+  
+  function hideResults() {
+    document.querySelector('.results').classList.remove('show');
+  }
+  
+  function showError(message) {
+    document.getElementById('errorMessage').textContent = message;
+    document.querySelector('.error').classList.add('show');
+  }
+  
+  function hideError() {
+    document.querySelector('.error').classList.remove('show');
+  }
+  
+  function disableButton() {
+    const btn = document.querySelector('.analyze-btn');
+    btn.disabled = true;
+    btn.textContent = 'Analyzing...';
+  }
+  
+  function enableButton() {
+    const btn = document.querySelector('.analyze-btn');
+    btn.disabled = false;
+    btn.textContent = 'Analyze Launch Costs';
+  }
+</script>
