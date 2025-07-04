@@ -198,7 +198,7 @@ Real people selling your product is 10x more persuasive than you doing it, so le
 
 ## WNas' Note: Yes, You Can Do This Without Ads
 
-Getting your first 100 customers on Shopify without ads isn’t just possible, it’s a stronger foundation than you may believe. You’re building a brand, not just buying clicks. You're validating needs, not just pushing product into the world. And ultimately, you're helping people find something that solves a particular pain point in their lives.
+Getting your first 100 customers on <a href="https://www.shopify.com/" target="_blank" rel="noopener noreferrer">Shopify</a> without ads isn’t just possible, it’s a stronger foundation than you may believe. You’re building a brand, not just buying clicks. You're validating needs, not just pushing product into the world. And ultimately, you're helping people find something that solves a particular pain point in their lives.
 
 
 **Want help crafting your Shopify launch strategy?** [Reach out here](https://www.sellingwithnas.com/contact) and let’s chat about how to grow without burning ad dollars.
