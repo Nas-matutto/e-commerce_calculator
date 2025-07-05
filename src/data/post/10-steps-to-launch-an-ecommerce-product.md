@@ -31,7 +31,7 @@ Here are some of the ways in which you can validate your product before commitin
 
 💡 Pro Tip: Speaking to friends and family doesn't count! They'll be way too nice, which actually works against you in the long term.
 
-Validate first — build later.
+Validate first, build later.
 
 
 ## 2. Spy on Your Market (in a Non-Creepy Way)
@@ -61,7 +61,7 @@ Keep everything looking consistent - your site, emails, social, even packaging. 
 
 ## 4. Source That Product Like a Boss
 
-Whether you’re making it yourself, dropshipping, or working with a factory, there are a few things to know when sourcing. This is a whole topic in itself, but to keep it short enough, you have to mock an initial product, order initial samples and maybe re-do this process a few times until you're happy enough with the result. Also be prepared to be hit with the dreaded *Minimum Order Quantities* from yoiur factory/manufacturer. Lower units normally means a higher price, but the bottom-line hit might be worth taking.
+Whether you’re making it yourself, dropshipping, or working with a factory, there are a few things to know when sourcing. This is a whole topic in itself, but to keep it short enough, you have to mock an initial product, order initial samples and maybe re-do this process a few times until you're happy enough with the result. Also be prepared to be hit with the dreaded *Minimum Order Quantities* from your factory/manufacturer. Lower units normally means a higher price, but the bottom-line hit might be worth taking.
 
 
 ## 5. Price It Right (No Guessing)
