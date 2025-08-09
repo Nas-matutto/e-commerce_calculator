@@ -25,7 +25,7 @@ This guide breaks down how to run your first Meta Ads campaign for your Shopify 
 
 ## Why Meta Ads Work for Shopify Brands
 
-Meta platforms are ideal for new DTC (Direct-to-Consumer) brands for a number of reasons. In fact, when you plan the launch of your brand, you should always have a set budget allocated for Meta Ads as that's where most likely your first few sales to strangers will come from. If you don't yet know how much it will cost you to launch your brand or are unsure about how much money you should have saved for Ads, check out [this tool](hhttps://www.sellingwithnas.com/tools/launch-cost-estimator) I put together. Meta Ads can help you with:
+Meta platforms are ideal for new DTC (Direct-to-Consumer) brands for a number of reasons. In fact, when you plan the launch of your brand, you should always have a set budget allocated for Meta Ads as that's where most likely your first few sales to strangers will come from. If you don't yet know how much it will cost you to launch your brand or are unsure about how much money you should have saved for Ads, check out <a href="https://www.sellingwithnas.com/tools/launch-cost-estimator" target="_blank" rel="noopener noreferrer">this tool</a> I put together. Meta Ads can help you with:
 
 - **Scalable reach**: Billions of daily active users are on Meta Platforms, so its a quick way to put your product in front of them.
 - **Visual storytelling**: Perfect for showcasing products through images and videos.
@@ -38,7 +38,7 @@ Meta platforms are ideal for new DTC (Direct-to-Consumer) brands for a number of
 
 Before spending a single dollar, make sure you track conversions, because without this, you will never know if your campaigns are working or not. To set up your tracking piexel, you should:
 
-- Go to [Meta Events Manager](https://business.facebook.com/events_manager2)
+- Go to <a href="https://www.sellingwithnas.com/tools/launch-cost-estimator" target="_blank" rel="noopener noreferrer"> Meta Events Manager</a>
 - Create a Pixel and connect it to your Shopify store.
 - Use Shopify’s built-in Meta integration or connect via Google Tag Manager.
 
@@ -174,5 +174,5 @@ Running Meta Ads for the first time can feel overwhelming, but if done right, it
 
 ---
 
-**Liked what you just saw?** Follow me on [YouTube](https://www.youtube.com/@sellingwithnas) or connect on [LinkedIn](https://www.linkedin.com/in/nasser-mansurali-659145102/) for more insights on growing e-commerce brands.
+**Liked what you just saw?** Follow me on <a href="https://www.youtube.com/@sellingwithnas" target="_blank" rel="noopener noreferrer">Youtube</a> or connect on <a href="https://www.linkedin.com/in/nasser-mansurali-659145102/" target="_blank" rel="noopener noreferrer">LinkedIn</a> for more insights on growing e-commerce brands.
 
