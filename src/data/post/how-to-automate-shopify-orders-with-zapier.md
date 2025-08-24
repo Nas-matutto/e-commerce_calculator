@@ -38,7 +38,8 @@ Before diving into the “how,” let’s talk about the **why**. It's not just 
 The beautiful thingabout automating your business, is that it all happens in real time. So whenever an order hits, you can automate it so that it appears instatnly in your google sheet, but also that your Ops team receives a slack message for example. This reduces manual misjudgement and speeds up operations.
 
 
-# Step 1: What You Need Before Starting
+
+## Step 1: What You Need Before Starting
 
 Make sure you have the following ready:
 
@@ -142,7 +143,7 @@ This means **each line item gets its own row**, which is much cleaner and far ea
 
 1. Place a test order in your Shopify store with multiple products.  
 2. Run the Zap test.  
-3. Check your Google Sheet—each product should appear as a **separate row**, with the correct customer and order details repeated across them.  
+3. Check your Google Sheet - each product should appear as a **separate row**, with the correct customer and order details repeated across them.  
 
 If something doesn’t map correctly, go back and adjust your field mappings in Zapier.
 
@@ -154,16 +155,27 @@ Once you’re happy with the setup:
 - Toggle your Zap to **“ON”**.  
 - Zapier will now monitor your Shopify store 24/7 and update your Google Sheet automatically whenever a new order is placed.  
 
+### Visual Workflow: Shopify → Zapier → Google Sheets
 
-## Bonus: Taking It Further
+Here’s a simple flow diagram of how the automation works:
 
-Once your Shopify–Google Sheets automation is live, you can extend it in powerful ways:
+```mermaid
+flowchart LR
+    A[Shopify: New Order] --> B[Zapier Trigger]
+    B --> C[Looping by Zapier: Line Items]
+    C --> D[Google Sheets: Create Row]
+    D -->|Each Line Item on New Row| E[Operations & Finance Team]
+```
 
-1. **Profitability tracking** – Add product cost data into your sheet, and use formulas to calculate gross margins automatically.  
-2. **Ops team workflows** – Share the sheet with your warehouse/fulfillment team so they can process orders in real time.  
-3. **Inventory monitoring** – Build a dashboard in Google Sheets to track product sales velocity.  
-4. **Reporting automation** – Connect your Google Sheet to Looker Studio for real-time sales reports.  
-5. **Notifications** – Use Zapier to send a Slack or Email alert whenever a high-value order comes in.  
+## Taking your automation even further
+
+Once your Shopify - Google Sheets automation is live, you can extend it in powerful ways:
+
+1. **Profitability tracking**: Add product cost data into your sheet, and use formulas to calculate gross margins automatically.  
+2. **Ops team workflows**: Share the sheet with your warehouse/fulfillment team so they can process orders in real time.  
+3. **Inventory monitoring**: Build a dashboard in Google Sheets to track product sales velocity.  
+4. **Reporting automation**: Connect your Google Sheet to Looker Studio for real-time sales reports.  
+5. **Notifications**: Use Zapier to send a Slack or Email alert whenever a high-value order comes in.  
 
 
 ## Nas' Note: Automating tasks will put you one step ahead

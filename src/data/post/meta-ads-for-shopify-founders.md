@@ -140,6 +140,15 @@ Data is at the core of your success running Meta Ads, and the below metrics are 
 
 Kill ads that don’t perform and double down on ads with lowest CPA or highest ROAS.
 
+
+## Watch my video about Meta Ads on new Shopify stores here
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UmqjH4KDWBg?si=-TvOeNn7ey98uA1V" 
+title="How to run Meta Ads on your Shopify Store as a beginner" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+
 ## Common Mistakes to Avoid
 
 - ❌ Running traffic campaigns too long without converting
