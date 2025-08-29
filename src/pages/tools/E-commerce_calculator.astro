@@ -77,12 +77,12 @@ const metadata = {
             <span class="result-value" id="totalCosts">$0.00</span>
           </div>
 
-          <div class="result-item highlight-result">
+          <div class="result-item">
             <span class="result-label">Revenue per Unit:</span>
             <span class="result-value" id="revenuePerUnit">$0.00</span>
           </div>
 
-          <div class="result-item">
+          <div class="result-item highlight-result">
             <span class="result-label">Profit per Unit:</span>
             <span class="result-value" id="profitPerUnit">$0.00</span>
           </div>
@@ -98,7 +98,7 @@ const metadata = {
             <div id="profitabilityMessage" style="margin-top: 15px; font-size: 1.1rem; font-weight: 600;"></div>
           </div>
 
-          <div class="result-item highlight-result" style="margin-top: 20px;">
+          <div class="result-item" style="margin-top: 20px;">
             <span class="result-label">Revenue based on Units Target:</span>
             <span class="result-value" id="revenueFromUnits">$0.00</span>
           </div>
@@ -530,6 +530,15 @@ const metadata = {
 </style>
 
 <script>
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
+  }
+
   function calculateResults() {
     console.log('calculateResults called');
     
@@ -624,8 +633,8 @@ const metadata = {
       messageElement.style.color = profitPerUnit < 0 ? '#dc2626' : '#059669';
     }
 
-    // Update revenue from units
-    if (revenueFromUnitsEl) revenueFromUnitsEl.textContent = `$${revenueFromUnits.toFixed(2)}`;
+    // Update revenue from units with proper formatting
+    if (revenueFromUnitsEl) revenueFromUnitsEl.textContent = formatCurrency(revenueFromUnits);
   }
 
   function initializeCalculator() {
