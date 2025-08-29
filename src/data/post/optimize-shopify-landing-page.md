@@ -180,6 +180,14 @@ If you're running paid ads, **don’t send traffic to your homepage.** Create pr
 This dramatically improves relevance, quality Score (if on Google), and conversion rates. It may seem like a lot of work, and honestly, it ptobably is - so I hope you're not a solo Brand-owner 😅 But if you are, you can always [**get in touch**](https://www.sellingwithnas.com/contact) for some help! Hint: You can use AI to accelerate Landing Page creation and iteration 😎 
 
 
+## Watch my video about optimizing your Landing page
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ju_kMQeNk-g?si=AmkRCBJECDpn13_i" 
+title="How to optimize your E-commerce landing page" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+
 ## Nas' Note: Use data as a source of truth, and when in doubt, default to action
 
 Your Shopify landing page isn’t just a digital brochure, it’s a sales engine - so let's make sure it's fast like a Ferrari. Focus on having a clear value proposition, strong visuals, in-built trust and frictionless UX. This cocktail will give you a great baseline. 

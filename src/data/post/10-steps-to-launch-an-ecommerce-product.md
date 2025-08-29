@@ -152,6 +152,14 @@ Now that you've started selling and that people are using your product, hear the
 And if they love it, ask for a testiominal and give them a discount code for their next purchase. This is where the real fun begins, because scaling can be stressful, but it's a whole lot of fun too. 
 
 
+## Watch my video about the 10 Steps to launch an E-commerce Brand
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rdTUiwIgyQs?si=D751cLuExofEo0e1" 
+title="10 Steps to launch an E-commerce Brand" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+
 ## Nas' Note: Don't let your ego get in the way
 
 Hitting $1 Million in sales on day 1 is not realistic, so don't believe those internet gurus driving lamborghinis. Building a business takes time, takes effort, and takes money - that's the simple hard truth. So focus on the basics, build a product that solves a real pain-point, validate people want it, and do your best to reach them.

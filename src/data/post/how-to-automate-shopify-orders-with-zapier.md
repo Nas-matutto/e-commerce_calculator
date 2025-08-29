@@ -155,6 +155,15 @@ Once you’re happy with the setup:
 - Toggle your Zap to **“ON”**.  
 - Zapier will now monitor your Shopify store 24/7 and update your Google Sheet automatically whenever a new order is placed.  
 
+
+## Watch my video about using Zapier to automate Shopify Orders
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ukhk4FlovSs?si=09pgaIpmjU7ZK_Sv" 
+title="How to automate Shopify orders into a Google Sheets with Zapier" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+
 ### Visual Workflow: Shopify → Zapier → Google Sheets
 
 Here’s a simple flow diagram of how the automation works:
